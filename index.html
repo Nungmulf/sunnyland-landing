@@ -1,0 +1,1131 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sunnyland · After-school cu suflet</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --c-bg: #FFF8E7;
+      --c-bg-alt: #FFEFC9;
+      --c-primary: #FFCB45;
+      --c-secondary: #7BC9A8;
+      --c-secondary-deep: #4A9D7C;
+      --c-accent: #FF8A3D;
+      --c-text: #3D2E1F;
+      --c-text-soft: #6B5A48;
+      --c-text-muted: #9A8A75;
+      --c-white: #FFFFFF;
+      --c-border: #EDE3CA;
+      --f-display: "Fraunces", "Georgia", serif;
+      --f-body: "Plus Jakarta Sans", system-ui, sans-serif;
+      --r-sm: 10px;
+      --r-md: 16px;
+      --r-lg: 24px;
+      --r-xl: 32px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--f-body);
+      color: var(--c-text);
+      background: var(--c-bg);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    img { max-width: 100%; display: block; }
+    button { font-family: inherit; cursor: pointer; border: none; background: none; }
+    a { color: inherit; text-decoration: none; }
+
+    h1, h2, h3, h4 {
+      font-family: var(--f-display);
+      font-weight: 600;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      color: var(--c-text);
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section { padding: 96px 0; }
+
+    @media (max-width: 768px) {
+      .section { padding: 64px 0; }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 28px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 16px;
+      transition: transform 0.15s ease, box-shadow 0.2s ease, background 0.2s ease;
+      white-space: nowrap;
+    }
+    .btn-primary {
+      background: var(--c-accent);
+      color: white;
+      box-shadow: 0 6px 0 #C25E1E, 0 12px 24px rgba(255, 138, 61, 0.3);
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 0 #C25E1E, 0 16px 28px rgba(255, 138, 61, 0.4); }
+    .btn-primary:active { transform: translateY(2px); box-shadow: 0 2px 0 #C25E1E, 0 4px 12px rgba(255, 138, 61, 0.3); }
+
+    .btn-secondary {
+      background: white;
+      color: var(--c-text);
+      border: 2px solid var(--c-text);
+      box-shadow: 0 4px 0 var(--c-text);
+    }
+    .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 6px 0 var(--c-text); }
+
+    .btn-ghost {
+      color: var(--c-text);
+      font-weight: 700;
+      padding: 14px 20px;
+    }
+    .btn-ghost:hover { color: var(--c-accent); }
+
+    /* Eyebrow */
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--c-secondary);
+      color: white;
+      font-weight: 700;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 999px;
+      transform: rotate(-1.5deg);
+    }
+    .eyebrow.yellow { background: var(--c-primary); color: var(--c-text); }
+    .eyebrow.orange { background: var(--c-accent); color: white; }
+
+    .section-title {
+      font-size: clamp(36px, 5vw, 56px);
+      margin: 16px 0 12px;
+      max-width: 720px;
+    }
+    .section-lede {
+      font-size: 18px;
+      color: var(--c-text-soft);
+      max-width: 560px;
+      text-wrap: pretty;
+    }
+
+    .section-head { margin-bottom: 56px; }
+    .section-head.center { text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .section-head.center .section-title,
+    .section-head.center .section-lede { margin-left: auto; margin-right: auto; }
+
+    /* Squiggle */
+    .squiggle {
+      position: relative;
+      display: inline-block;
+      white-space: nowrap;
+    }
+    .squiggle::after {
+      content: "";
+      position: absolute;
+      left: 0; right: 0; bottom: -8px;
+      height: 14px;
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 14' preserveAspectRatio='none'><path d='M0 8 Q 12.5 0 25 8 T 50 8 T 75 8 T 100 8' stroke='%23FFCB45' stroke-width='4' fill='none' stroke-linecap='round'/></svg>");
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+    }
+    .squiggle.orange::after {
+      background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 14' preserveAspectRatio='none'><path d='M0 8 Q 12.5 0 25 8 T 50 8 T 75 8 T 100 8' stroke='%23FF8A3D' stroke-width='4' fill='none' stroke-linecap='round'/></svg>");
+    }
+
+    /* Placeholder */
+    .ph {
+      background:
+        repeating-linear-gradient(45deg, rgba(0,0,0,0.04) 0 8px, transparent 8px 16px),
+        var(--ph-bg, #FFE3A3);
+      border-radius: var(--r-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "JetBrains Mono", "Courier New", monospace;
+      font-size: 12px;
+      color: var(--c-text-soft);
+      text-align: center;
+      padding: 16px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ph.green { --ph-bg: #BCE0CC; }
+    .ph.peach { --ph-bg: #FFD0AE; }
+    .ph.cream { --ph-bg: #FFE3A3; }
+    .ph.lilac { --ph-bg: #E0D0F0; }
+
+    /* Card */
+    .card {
+      background: white;
+      border-radius: var(--r-lg);
+      padding: 32px;
+      border: 1.5px solid var(--c-border);
+    }
+    .card-shadow { box-shadow: 0 8px 0 rgba(61, 46, 31, 0.06), 0 16px 40px rgba(61, 46, 31, 0.06); }
+
+    /* Sticker */
+    .sticker {
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 13px;
+      transform: rotate(-3deg);
+      white-space: nowrap;
+    }
+
+    /* Nav responsive */
+    @media (max-width: 880px) {
+      .nav-desktop { display: none !important; }
+      .nav-burger { display: flex !important; }
+    }
+    @media (min-width: 881px) {
+      .nav-mobile-panel { display: none !important; }
+    }
+    @media (max-width: 520px) {
+      header .btn-primary { display: none !important; }
+    }
+
+    /* Hero responsive */
+    @media (max-width: 900px) {
+      .hero-grid { grid-template-columns: 1fr !important; gap: 48px !important; }
+      .hero-media { max-width: 420px; margin: 0 auto; }
+    }
+    @media (max-width: 640px) {
+      .stats-strip { grid-template-columns: repeat(2, 1fr) !important; gap: 16px; }
+      .stats-strip > div { border-left: none !important; border-top: 1px solid var(--c-border); padding-top: 16px !important; }
+      .stats-strip > div:nth-child(-n+2) { border-top: none !important; padding-top: 0 !important; }
+    }
+
+    /* Despre responsive */
+    @media (max-width: 900px) {
+      .despre-grid { grid-template-columns: 1fr !important; gap: 80px !important; }
+    }
+
+    /* Timeline responsive */
+    @media (max-width: 720px) {
+      .timeline { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
+    }
+
+    /* Gallery responsive */
+    @media (max-width: 760px) {
+      .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
+      .gallery-grid > div { grid-row: span 1 !important; grid-column: span 1 !important; }
+    }
+
+    /* Testimonials responsive */
+    @media (max-width: 880px) {
+      .testimonials-stack { grid-template-columns: 1fr !important; }
+      .trust-strip { grid-template-columns: 1fr !important; text-align: center; }
+    }
+
+    /* Location responsive */
+    @media (max-width: 880px) {
+      .loc-grid { grid-template-columns: 1fr !important; gap: 56px !important; }
+    }
+
+    /* Contact responsive */
+    @media (max-width: 880px) {
+      .contact-grid { grid-template-columns: 1fr !important; }
+    }
+
+    /* Footer responsive */
+    @media (max-width: 760px) {
+      .footer-grid { grid-template-columns: 1fr 1fr !important; }
+    }
+    @media (max-width: 480px) {
+      .footer-grid { grid-template-columns: 1fr !important; }
+    }
+
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { scrollbar-width: none; }
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" crossorigin="anonymous"></script>
+
+  <script type="text/babel">
+    /* ── Logo ── */
+    function Logo({ size = 48, showText = true }) {
+      return (
+        <a href="#top" style={{ display: "flex", alignItems: "center", gap: 12, fontFamily: "var(--f-display)", fontWeight: 700, fontSize: 22, color: "var(--c-text)" }}>
+          <span style={{
+            width: size, height: size, borderRadius: "50%",
+            overflow: "hidden",
+            boxShadow: "0 4px 0 rgba(61,46,31,0.15)",
+            border: "3px solid #fff",
+            display: "block", flexShrink: 0,
+          }}>
+            <img src="assets/logo.png" alt="Sunnyland logo" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+          </span>
+          {showText && <span>Sunnyland</span>}
+        </a>
+      );
+    }
+
+    /* ── Nav ── */
+    function Nav() {
+      const [open, setOpen] = React.useState(false);
+      const links = [
+        { href: "#despre", label: "Despre" },
+        { href: "#oferim", label: "Activități" },
+        { href: "#galerie", label: "Galerie" },
+        { href: "#parinti", label: "Părinți" },
+        { href: "#faq", label: "FAQ" },
+        { href: "#contact", label: "Contact" },
+      ];
+      return (
+        <header style={{
+          position: "sticky", top: 0, zIndex: 50,
+          background: "rgba(255,248,231,0.85)",
+          backdropFilter: "blur(12px)",
+          borderBottom: "1.5px solid var(--c-border)",
+        }}>
+          <div className="container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "16px 24px" }}>
+            <Logo />
+            <nav style={{ display: "flex", alignItems: "center", gap: 4 }} className="nav-desktop">
+              {links.map(l => (
+                <a key={l.href} href={l.href} style={{
+                  padding: "10px 14px", borderRadius: 999, fontWeight: 600, fontSize: 15,
+                  color: "var(--c-text)", transition: "background 0.15s",
+                }} onMouseEnter={e => e.currentTarget.style.background = "rgba(123,201,168,0.18)"}
+                   onMouseLeave={e => e.currentTarget.style.background = "transparent"}>
+                  {l.label}
+                </a>
+              ))}
+            </nav>
+            <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+              <a href="#contact" className="btn btn-primary" style={{ padding: "12px 22px", fontSize: 15 }}>
+                Programează un tur →
+              </a>
+              <button className="nav-burger" onClick={() => setOpen(!open)} style={{
+                display: "none", width: 44, height: 44, borderRadius: 12,
+                background: "white", border: "1.5px solid var(--c-border)",
+                alignItems: "center", justifyContent: "center",
+              }}>
+                <span style={{ fontSize: 22 }}>{open ? "✕" : "☰"}</span>
+              </button>
+            </div>
+          </div>
+          {open && (
+            <div className="nav-mobile-panel" style={{ borderTop: "1.5px solid var(--c-border)", padding: "12px 24px 24px", background: "var(--c-bg)" }}>
+              {links.map(l => (
+                <a key={l.href} href={l.href} onClick={() => setOpen(false)} style={{
+                  display: "block", padding: "14px 8px", fontWeight: 600, fontSize: 17,
+                  borderBottom: "1px solid var(--c-border)",
+                }}>{l.label}</a>
+              ))}
+            </div>
+          )}
+        </header>
+      );
+    }
+
+    /* ── Hero ── */
+    function HeroBlobs() {
+      return (
+        <svg viewBox="0 0 800 600" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0 }} aria-hidden="true">
+          <defs>
+            <radialGradient id="sun" cx="50%" cy="50%">
+              <stop offset="0%" stopColor="#FFE17A" />
+              <stop offset="100%" stopColor="#FFCB45" />
+            </radialGradient>
+          </defs>
+          <circle cx="680" cy="120" r="90" fill="url(#sun)" opacity="0.9" />
+          <path d="M -50 480 Q 200 380 380 460 T 850 480 L 850 700 L -50 700 Z" fill="#7BC9A8" opacity="0.35" />
+          <path d="M -50 540 Q 250 460 450 520 T 850 530 L 850 700 L -50 700 Z" fill="#7BC9A8" opacity="0.55" />
+        </svg>
+      );
+    }
+
+    function Hero() {
+      return (
+        <section id="top" style={{ position: "relative", overflow: "hidden", paddingBottom: 80 }}>
+          <HeroBlobs />
+          <div className="container" style={{ position: "relative", zIndex: 1, paddingTop: 60, paddingBottom: 40 }}>
+            <div className="hero-grid" style={{
+              display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 64, alignItems: "center",
+            }}>
+              <div>
+                <span className="eyebrow orange">☀ After-school cu suflet</span>
+                <h1 style={{
+                  fontSize: "clamp(44px, 6.5vw, 80px)",
+                  margin: "20px 0 24px",
+                  lineHeight: 1,
+                }}>
+                  După școală, copilul tău intră într-un{" "}
+                  <span className="squiggle orange" style={{ color: "var(--c-secondary-deep)" }}>univers</span>{" "}
+                  al lui.
+                </h1>
+                <p style={{ fontSize: 20, color: "var(--c-text-soft)", maxWidth: 520, marginBottom: 36, textWrap: "pretty" }}>
+                  La Sunnyland, copiii de 6–10 ani își termină temele liniștiți, mănâncă o masă caldă, descoperă pasiuni noi și pleacă acasă obosiți de fericire.
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: 32 }}>
+                  <a href="#contact" className="btn btn-primary">
+                    Programează un tur gratuit →
+                  </a>
+                  <a href="#oferim" className="btn btn-ghost">
+                    Vezi ce facem într-o zi
+                  </a>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 28, color: "var(--c-text-soft)", fontSize: 15, fontWeight: 600 }}>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "var(--c-secondary-deep)", fontSize: 20 }}>✓</span> Transport de la școală
+                  </span>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "var(--c-secondary-deep)", fontSize: 20 }}>✓</span> Educatori certificați
+                  </span>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "var(--c-secondary-deep)", fontSize: 20 }}>✓</span> Maxim 8 copii / grupă
+                  </span>
+                </div>
+              </div>
+              <div style={{ position: "relative" }} className="hero-media">
+                <div className="ph cream" style={{
+                  aspectRatio: "4/5", borderRadius: 28,
+                  transform: "rotate(2deg)",
+                  boxShadow: "0 12px 0 rgba(61,46,31,0.08), 0 30px 60px rgba(61,46,31,0.12)",
+                  border: "6px solid white",
+                }}>
+                  [ photo: copil zâmbind cu rucsac ]
+                </div>
+                <div className="sticker" style={{
+                  position: "absolute", top: -18, left: -22,
+                  background: "var(--c-accent)", color: "white",
+                  transform: "rotate(-8deg)", fontSize: 14,
+                  boxShadow: "0 6px 20px rgba(255,138,61,0.4)",
+                  padding: "10px 18px",
+                }}>
+                  ⭐ 4.9/5 din 127 părinți
+                </div>
+                <div className="sticker" style={{
+                  position: "absolute", bottom: 40, right: -28,
+                  background: "white", color: "var(--c-text)",
+                  transform: "rotate(5deg)", fontSize: 14,
+                  border: "2px solid var(--c-text)",
+                  boxShadow: "0 4px 0 var(--c-text)",
+                  padding: "10px 18px",
+                }}>
+                  🍎 Masă caldă inclusă
+                </div>
+                <div className="sticker" style={{
+                  position: "absolute", top: "45%", left: -36,
+                  background: "var(--c-secondary)", color: "white",
+                  transform: "rotate(-4deg)", fontSize: 14,
+                  boxShadow: "0 6px 20px rgba(123,201,168,0.4)",
+                  padding: "10px 18px",
+                }}>
+                  🎨 6 ateliere/săptămână
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats strip */}
+          <div className="container" style={{ position: "relative", zIndex: 1, marginTop: 60 }}>
+            <div className="stats-strip" style={{
+              display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
+              background: "white", borderRadius: 24, padding: "28px 16px",
+              border: "1.5px solid var(--c-border)",
+              boxShadow: "0 8px 0 rgba(61,46,31,0.04), 0 20px 50px rgba(61,46,31,0.06)",
+            }}>
+              {[
+                { n: "8 ani", l: "alături de copiii din cartier" },
+                { n: "240+", l: "copii absolvenți Sunnyland" },
+                { n: "1:8", l: "raport educator / copii" },
+                { n: "16:00–19:00", l: "program flexibil L–V" },
+              ].map((s, i) => (
+                <div key={i} style={{ textAlign: "center", padding: "8px 12px", borderLeft: i ? "1px solid var(--c-border)" : "none" }}>
+                  <div style={{ fontFamily: "var(--f-display)", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 700, color: "var(--c-accent)" }}>{s.n}</div>
+                  <div style={{ fontSize: 13, color: "var(--c-text-soft)", marginTop: 4 }}>{s.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── Despre ── */
+    function Despre() {
+      return (
+        <section id="despre" className="section" style={{ background: "var(--c-bg)" }}>
+          <div className="container">
+            <div className="despre-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1.1fr", gap: 72, alignItems: "center" }}>
+              <div style={{ position: "relative" }}>
+                <div className="ph green" style={{
+                  aspectRatio: "4/5", borderRadius: 28,
+                  border: "6px solid white",
+                  boxShadow: "0 12px 0 rgba(61,46,31,0.08), 0 30px 60px rgba(61,46,31,0.08)",
+                }}>
+                  [ photo: educator citind cu copii ]
+                </div>
+                <div className="ph peach" style={{
+                  position: "absolute", bottom: -32, right: -32,
+                  width: "55%", aspectRatio: "1/1", borderRadius: 24,
+                  border: "6px solid white",
+                  transform: "rotate(-3deg)",
+                  boxShadow: "0 12px 30px rgba(61,46,31,0.12)",
+                }}>
+                  [ photo: experiment ]
+                </div>
+              </div>
+              <div>
+                <span className="eyebrow">Despre Sunnyland</span>
+                <h2 className="section-title" style={{ marginTop: 16 }}>
+                  Un loc unde copiii cresc, nu doar își fac{" "}
+                  <span className="squiggle">temele</span>.
+                </h2>
+                <p style={{ fontSize: 18, color: "var(--c-text-soft)", marginBottom: 20, textWrap: "pretty" }}>
+                  Sunnyland s-a născut în 2018 dintr-o întrebare simplă: <em>ce se întâmplă cu copilul nostru între 14:00 și 19:00?</em> Ne-am dorit un loc cald, în care părinții să-și lase copilul fără griji, iar copilul să vină cu drag.
+                </p>
+                <p style={{ fontSize: 18, color: "var(--c-text-soft)", marginBottom: 32, textWrap: "pretty" }}>
+                  Astăzi suntem o echipă de 12 educatori, lucrăm cu grupe mici și ne ținem de promisiune: fiecare copil este văzut, ascultat și încurajat.
+                </p>
+                <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
+                  {[
+                    { ic: "🎯", t: "Misiune clară", d: "Sprijin la teme + dezvoltare personală echilibrată." },
+                    { ic: "🤝", t: "Parteneri cu părinții", d: "Comunicare săptămânală despre evoluția copilului." },
+                  ].map((v, i) => (
+                    <div key={i} style={{ padding: "20px 22px", background: "white", borderRadius: 20, border: "1.5px solid var(--c-border)" }}>
+                      <div style={{ fontSize: 28, marginBottom: 8 }}>{v.ic}</div>
+                      <div style={{ fontFamily: "var(--f-display)", fontSize: 18, fontWeight: 700, marginBottom: 4 }}>{v.t}</div>
+                      <div style={{ fontSize: 14, color: "var(--c-text-soft)" }}>{v.d}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── Oferim ── */
+    function Oferim() {
+      const items = [
+        { ic: "📚", t: "Sprijin la teme", d: "Educatorii ajută copilul să-și termine temele corect și fără frustrare. Acasă rămâne timp pentru familie.", color: "#FFCB45" },
+        { ic: "🧪", t: "Ateliere de știință", d: "Experimente săptămânale: vulcani de bicarbonat, electronică simplă, magneți, biologie cu lupa.", color: "#7BC9A8" },
+        { ic: "🎨", t: "Artă & creație", d: "Pictură, modelaj, colaje, lucru manual. Spațiu propriu, materiale bune, fără presiune.", color: "#FF8A3D" },
+        { ic: "⚽", t: "Mișcare zilnică", d: "30 de minute pe zi în curte sau în sala de sport. Jocuri de echipă, nu antrenamente forțate.", color: "#7BC9A8" },
+        { ic: "📖", t: "Lectură pe perne", d: "Bibliotecă cu 400+ cărți, colț de citit, povești citite cu voce tare miercurea.", color: "#FFCB45" },
+        { ic: "🍲", t: "Masă caldă inclusă", d: "Meniu echilibrat, gătit zilnic. Fără mâncare procesată, fără surprize.", color: "#FF8A3D" },
+      ];
+      return (
+        <section id="oferim" className="section" style={{ background: "var(--c-bg-alt)", position: "relative", overflow: "hidden" }}>
+          <div className="container" style={{ position: "relative" }}>
+            <div className="section-head center">
+              <span className="eyebrow yellow">Activități</span>
+              <h2 className="section-title" style={{ marginTop: 16 }}>
+                Ce se întâmplă într-o zi la <span className="squiggle">Sunnyland</span>?
+              </h2>
+              <p className="section-lede">
+                Un program echilibrat: temele se fac, dar nu uităm că suntem copii. Iată cele 6 piese care alcătuiesc fiecare zi.
+              </p>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+              {items.map((it, i) => (
+                <div key={i} className="card card-shadow" style={{
+                  padding: "32px 28px",
+                  transition: "transform 0.2s ease",
+                }}
+                  onMouseEnter={e => e.currentTarget.style.transform = "translateY(-4px) rotate(-0.5deg)"}
+                  onMouseLeave={e => e.currentTarget.style.transform = "none"}>
+                  <div style={{
+                    width: 56, height: 56, borderRadius: 16,
+                    background: it.color, display: "grid", placeItems: "center",
+                    fontSize: 28, marginBottom: 20,
+                    boxShadow: `0 6px 0 ${it.color}80`,
+                  }}>{it.ic}</div>
+                  <h3 style={{ fontSize: 22, marginBottom: 10 }}>{it.t}</h3>
+                  <p style={{ color: "var(--c-text-soft)", fontSize: 15.5 }}>{it.d}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Day timeline */}
+            <div style={{ marginTop: 80 }}>
+              <h3 style={{ fontSize: 28, marginBottom: 28, textAlign: "center" }}>
+                O zi tipică, oră cu oră
+              </h3>
+              <div className="timeline" style={{
+                display: "grid", gridTemplateColumns: "repeat(5, 1fr)", gap: 12,
+                background: "white", borderRadius: 24, padding: 24,
+                border: "1.5px solid var(--c-border)",
+              }}>
+                {[
+                  { t: "14:00", l: "Preluare de la școală", c: "var(--c-primary)" },
+                  { t: "14:30", l: "Masă caldă & relaxare", c: "var(--c-secondary)" },
+                  { t: "15:30", l: "Teme + sprijin 1:1", c: "var(--c-accent)" },
+                  { t: "17:00", l: "Atelier zilnic", c: "var(--c-secondary)" },
+                  { t: "18:00", l: "Mișcare & joacă liberă", c: "var(--c-primary)" },
+                ].map((s, i) => (
+                  <div key={i} style={{ position: "relative", paddingTop: 28 }}>
+                    <div style={{
+                      position: "absolute", top: 0, left: 0, right: 0,
+                      height: 12, background: s.c, borderRadius: 6,
+                    }} />
+                    <div style={{ fontFamily: "var(--f-display)", fontWeight: 700, fontSize: 20, color: "var(--c-text)" }}>{s.t}</div>
+                    <div style={{ fontSize: 14, color: "var(--c-text-soft)", marginTop: 4 }}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── Galerie ── */
+    function Galerie() {
+      const photos = [
+        { c: "cream", l: "atelier pictură", r: 2, span: 2 },
+        { c: "green", l: "ora de teme", r: 1, span: 1 },
+        { c: "peach", l: "joc în curte", r: -2, span: 1 },
+        { c: "lilac", l: "experiment știință", r: 1, span: 1 },
+        { c: "cream", l: "masa de prânz", r: -1, span: 1 },
+        { c: "green", l: "lectură pe perne", r: 3, span: 2 },
+        { c: "peach", l: "lucru manual", r: -2, span: 1 },
+        { c: "lilac", l: "ziua absolventului", r: 2, span: 1 },
+      ];
+      return (
+        <section id="galerie" className="section" style={{ background: "var(--c-bg)" }}>
+          <div className="container">
+            <div className="section-head center">
+              <span className="eyebrow orange">Galerie</span>
+              <h2 className="section-title" style={{ marginTop: 16 }}>
+                Așa arată o săptămână la noi
+              </h2>
+              <p className="section-lede">
+                Fără filtre, fără pozat. Doar copii care se simt bine.
+              </p>
+            </div>
+            <div className="gallery-grid" style={{
+              display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16,
+              gridAutoRows: "180px",
+            }}>
+              {photos.map((p, i) => (
+                <div key={i} className={`ph ${p.c}`} style={{
+                  gridColumn: `span ${p.span}`,
+                  gridRow: i === 0 || i === 5 ? "span 2" : "span 1",
+                  borderRadius: 20,
+                  transform: `rotate(${p.r * 0.3}deg)`,
+                  border: "5px solid white",
+                  boxShadow: "0 8px 24px rgba(61,46,31,0.08)",
+                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                  cursor: "pointer",
+                }}
+                  onMouseEnter={e => { e.currentTarget.style.transform = `rotate(0deg) scale(1.02)`; e.currentTarget.style.boxShadow = "0 16px 40px rgba(61,46,31,0.15)"; }}
+                  onMouseLeave={e => { e.currentTarget.style.transform = `rotate(${p.r * 0.3}deg)`; e.currentTarget.style.boxShadow = "0 8px 24px rgba(61,46,31,0.08)"; }}>
+                  [ {p.l} ]
+                </div>
+              ))}
+            </div>
+            <div style={{ textAlign: "center", marginTop: 40 }}>
+              <a href="#contact" className="btn btn-secondary">Vezi mai multe în vizita ta →</a>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── Părinți ── */
+    function Parinti() {
+      const [active, setActive] = React.useState(0);
+      const items = [
+        {
+          q: "Mihai vine acasă cu temele făcute, mâncat și fericit. Pentru noi, ca părinți care lucrăm până la 18, este liniștea zilnică de care aveam nevoie.",
+          n: "Andreea M.",
+          r: "mama lui Mihai, clasa a III-a",
+          c: "var(--c-secondary)",
+        },
+        {
+          q: "Am încercat trei after-school-uri. Sunnyland a fost singurul unde fata mea a cerut singură să meargă a doua zi. Asta spune tot.",
+          n: "Radu D.",
+          r: "tatăl Mariei, clasa I",
+          c: "var(--c-primary)",
+        },
+        {
+          q: "Comunicarea cu doamna Iulia este excepțională. Știu de fiecare dată cum a fost ziua, ce a făcut, ce dificultăți a întâmpinat. Mă simt parte din echipă.",
+          n: "Cristina P.",
+          r: "mama lui Vlad, clasa a II-a",
+          c: "var(--c-accent)",
+        },
+      ];
+      return (
+        <section id="parinti" className="section" style={{ background: "var(--c-bg-alt)" }}>
+          <div className="container">
+            <div className="section-head center">
+              <span className="eyebrow">Părinți</span>
+              <h2 className="section-title" style={{ marginTop: 16 }}>
+                Ce spun părinții care ne-au încredințat copiii
+              </h2>
+            </div>
+
+            <div className="testimonials-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+              {items.map((t, i) => (
+                <div key={i} className="card card-shadow" style={{
+                  padding: "36px 32px",
+                  borderTop: `6px solid ${t.c}`,
+                  position: "relative",
+                  transform: i === active ? "translateY(-8px)" : "none",
+                  transition: "transform 0.25s ease",
+                }}>
+                  <div style={{
+                    position: "absolute", top: -22, left: 24,
+                    width: 44, height: 44, borderRadius: "50%",
+                    background: t.c, display: "grid", placeItems: "center",
+                    fontSize: 22, color: "white", fontFamily: "var(--f-display)",
+                    fontWeight: 700,
+                  }}>"</div>
+                  <p style={{ fontSize: 17, color: "var(--c-text)", lineHeight: 1.55, marginBottom: 24, textWrap: "pretty" }}>
+                    {t.q}
+                  </p>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    <div style={{
+                      width: 44, height: 44, borderRadius: "50%",
+                      background: t.c, opacity: 0.2,
+                      display: "grid", placeItems: "center",
+                      color: "var(--c-text)", fontWeight: 700, fontFamily: "var(--f-display)",
+                    }}>{t.n[0]}</div>
+                    <div>
+                      <div style={{ fontWeight: 700, fontSize: 15 }}>{t.n}</div>
+                      <div style={{ fontSize: 13, color: "var(--c-text-soft)" }}>{t.r}</div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Trust strip */}
+            <div className="trust-strip" style={{
+              marginTop: 56, padding: "32px 32px",
+              background: "white", borderRadius: 24,
+              border: "1.5px solid var(--c-border)",
+              display: "grid", gridTemplateColumns: "auto 1fr auto", gap: 32,
+              alignItems: "center",
+            }}>
+              <div style={{ fontSize: 56 }}>⭐</div>
+              <div>
+                <div style={{ fontFamily: "var(--f-display)", fontSize: 28, fontWeight: 700 }}>4.9 / 5 din 127 recenzii</div>
+                <div style={{ color: "var(--c-text-soft)", marginTop: 4 }}>Google Reviews · 96% din părinți ar recomanda Sunnyland unui prieten.</div>
+              </div>
+              <a href="#contact" className="btn btn-primary" style={{ padding: "14px 24px", fontSize: 15 }}>Vino într-un tur →</a>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── FAQ ── */
+    function Faq() {
+      const [open, setOpen] = React.useState(0);
+      const qs = [
+        { q: "Ce vârste acceptați?", a: "Lucrăm cu copii din clasele 0–IV (6–10 ani). Avem grupe separate pe nivel de clasă, ca să nu amestecăm cei mici cu cei mari la teme." },
+        { q: "Care este programul?", a: "Luni–Vineri, 13:00–19:00. Programul flexibil: poți lăsa copilul oricând după 13:00 și îl iei până la 19:00. Avem și opțiune de transport de la școală." },
+        { q: "Câți copii sunt într-o grupă?", a: "Maxim 8 copii per educator. Niciun copil nu se pierde în mulțime. La teme lucrăm 1:1 sau în perechi." },
+        { q: "Ce conține masa caldă?", a: "Meniu echilibrat, gătit zilnic în bucătăria proprie de către o doamnă cu peste 15 ani de experiență. Fără mâncare procesată, fără semipreparate. Adaptăm pentru intoleranțe." },
+        { q: "Cât costă lunar?", a: "Trei pachete: 4 zile (1100 lei), 5 zile (1350 lei) sau pachet complet cu transport și ateliere extra (1650 lei). Toate includ masa caldă, gustare și toate atelierele." },
+        { q: "Cum mă pot înscrie?", a: "Programează un tur gratuit – îți arătăm spațiul, ne cunoaștem, copilul vede dacă i se potrivește. Doar dacă vă convine apoi semnăm contractul." },
+        { q: "Pot vedea cum decurge o zi înainte?", a: "Da. Oferim o zi de probă gratuită – copilul tău vine, mănâncă, face teme, participă la atelier. Decizia o luați împreună." },
+      ];
+      return (
+        <section id="faq" className="section" style={{ background: "var(--c-bg)" }}>
+          <div className="container" style={{ maxWidth: 880 }}>
+            <div className="section-head center">
+              <span className="eyebrow yellow">Întrebări frecvente</span>
+              <h2 className="section-title" style={{ marginTop: 16 }}>
+                Ce ne întreabă cel mai des părinții
+              </h2>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {qs.map((it, i) => {
+                const isOpen = open === i;
+                return (
+                  <div key={i} style={{
+                    background: isOpen ? "white" : "rgba(255,255,255,0.6)",
+                    borderRadius: 20,
+                    border: `1.5px solid ${isOpen ? "var(--c-secondary)" : "var(--c-border)"}`,
+                    overflow: "hidden",
+                    transition: "all 0.2s ease",
+                  }}>
+                    <button onClick={() => setOpen(isOpen ? -1 : i)} style={{
+                      width: "100%", textAlign: "left",
+                      padding: "22px 28px",
+                      display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16,
+                      fontSize: 18, fontWeight: 600, color: "var(--c-text)",
+                      fontFamily: "var(--f-body)",
+                    }}>
+                      <span>{it.q}</span>
+                      <span style={{
+                        width: 36, height: 36, flexShrink: 0,
+                        borderRadius: "50%",
+                        background: isOpen ? "var(--c-accent)" : "var(--c-bg-alt)",
+                        color: isOpen ? "white" : "var(--c-text)",
+                        display: "grid", placeItems: "center",
+                        fontSize: 22, fontWeight: 700,
+                        transition: "all 0.2s ease",
+                        transform: isOpen ? "rotate(45deg)" : "none",
+                      }}>+</span>
+                    </button>
+                    {isOpen && (
+                      <div style={{ padding: "0 28px 24px", color: "var(--c-text-soft)", fontSize: 16, lineHeight: 1.6, textWrap: "pretty" }}>
+                        {it.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── Locatie ── */
+    function Locatie() {
+      return (
+        <section id="locatie" className="section" style={{ background: "var(--c-bg-alt)" }}>
+          <div className="container">
+            <div className="loc-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 56, alignItems: "center" }}>
+              <div>
+                <span className="eyebrow">Locație</span>
+                <h2 className="section-title" style={{ marginTop: 16 }}>
+                  La 5 minute de Școala 195
+                </h2>
+                <p style={{ fontSize: 18, color: "var(--c-text-soft)", marginBottom: 28, textWrap: "pretty" }}>
+                  Suntem într-o casă cu curte, pe o stradă liniștită din Sectorul 1. Spațiu cald, luminat natural, gândit pentru copii.
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+                  {[
+                    { ic: "📍", t: "Strada Macilor 24, Sector 1", d: "București, 014255" },
+                    { ic: "🚗", t: "Transport școală → Sunnyland", d: "Preluare zilnică de la 4 școli partenere" },
+                    { ic: "🏡", t: "Casă cu curte", d: "180 mp interior + 90 mp grădină proprie" },
+                    { ic: "🛡", t: "Acces controlat", d: "Cod la intrare. Predarea copilului doar către persoane autorizate." },
+                  ].map((it, i) => (
+                    <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
+                      <div style={{
+                        width: 48, height: 48, flexShrink: 0,
+                        borderRadius: 14, background: "white",
+                        border: "1.5px solid var(--c-border)",
+                        display: "grid", placeItems: "center", fontSize: 22,
+                      }}>{it.ic}</div>
+                      <div>
+                        <div style={{ fontWeight: 700, fontSize: 16 }}>{it.t}</div>
+                        <div style={{ color: "var(--c-text-soft)", fontSize: 14, marginTop: 2 }}>{it.d}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div style={{ position: "relative" }}>
+                <div style={{
+                  aspectRatio: "1/1", borderRadius: 28,
+                  border: "6px solid white",
+                  boxShadow: "0 12px 0 rgba(61,46,31,0.06), 0 30px 60px rgba(61,46,31,0.08)",
+                  background: "linear-gradient(135deg, #BCE0CC, #A2D4BB 50%, #7BC9A8)",
+                  position: "relative", overflow: "hidden",
+                }}>
+                  <svg viewBox="0 0 400 400" style={{ width: "100%", height: "100%" }}>
+                    <rect width="400" height="400" fill="transparent" />
+                    <path d="M 0 240 L 400 240" stroke="#FFF8E7" strokeWidth="22" />
+                    <path d="M 160 0 L 160 400" stroke="#FFF8E7" strokeWidth="22" />
+                    <path d="M 280 80 L 400 80" stroke="#FFF8E7" strokeWidth="14" />
+                    <path d="M 280 80 L 280 240" stroke="#FFF8E7" strokeWidth="14" />
+                    <rect x="20" y="20" width="120" height="200" rx="14" fill="#4A9D7C" opacity="0.4" />
+                    <rect x="180" y="20" width="80" height="200" rx="14" fill="#4A9D7C" opacity="0.25" />
+                    <rect x="20" y="260" width="120" height="120" rx="14" fill="#4A9D7C" opacity="0.25" />
+                    <rect x="180" y="260" width="200" height="120" rx="14" fill="#4A9D7C" opacity="0.4" />
+                    <text x="80" y="125" textAnchor="middle" fill="white" fontSize="13" fontFamily="var(--f-display)" fontWeight="700">Parc</text>
+                    <text x="80" y="325" textAnchor="middle" fill="white" fontSize="11" fontFamily="var(--f-display)">Școala 195</text>
+                    <g transform="translate(280, 240)">
+                      <circle cx="0" cy="0" r="32" fill="#FF8A3D" opacity="0.25" />
+                      <circle cx="0" cy="0" r="22" fill="white" />
+                      <image href="assets/logo.png" x="-20" y="-20" width="40" height="40" clipPath="circle(20px at 20px 20px)" />
+                    </g>
+                    <text x="280" y="290" textAnchor="middle" fill="#3D2E1F" fontSize="14" fontFamily="var(--f-display)" fontWeight="700">Sunnyland</text>
+                  </svg>
+                  <div style={{
+                    position: "absolute", bottom: 16, left: 16, right: 16,
+                    background: "white", padding: "14px 18px", borderRadius: 16,
+                    display: "flex", justifyContent: "space-between", alignItems: "center",
+                    boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
+                  }}>
+                    <div>
+                      <div style={{ fontWeight: 700, fontSize: 14 }}>Strada Macilor 24</div>
+                      <div style={{ fontSize: 12, color: "var(--c-text-soft)" }}>Sector 1, București</div>
+                    </div>
+                    <a href="#" className="btn btn-ghost" style={{ padding: "8px 14px", fontSize: 13, color: "var(--c-accent)" }}>Deschide harta →</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── Contact + Footer ── */
+    function Field({ label, v, on, placeholder, required }) {
+      return (
+        <label style={{ display: "block" }}>
+          <span style={{ fontSize: 13, fontWeight: 600, marginBottom: 6, display: "block", color: "var(--c-text-soft)" }}>{label}</span>
+          <input value={v} onChange={on} placeholder={placeholder} required={required} style={{
+            width: "100%", padding: "14px 16px",
+            borderRadius: 14, border: "1.5px solid var(--c-border)",
+            fontFamily: "inherit", fontSize: 15,
+            background: "var(--c-bg)",
+            outline: "none",
+          }} onFocus={e => e.target.style.borderColor = "var(--c-accent)"}
+             onBlur={e => e.target.style.borderColor = "var(--c-border)"} />
+        </label>
+      );
+    }
+
+    function Contact() {
+      const [form, setForm] = React.useState({ name: "", phone: "", child: "", message: "", time: "dimineata" });
+      const [sent, setSent] = React.useState(false);
+      const update = (k) => (e) => setForm({ ...form, [k]: e.target.value });
+
+      return (
+        <section id="contact" className="section" style={{
+          background: "var(--c-bg)",
+          position: "relative", overflow: "hidden",
+        }}>
+          <div className="container">
+            <div className="contact-grid" style={{
+              display: "grid", gridTemplateColumns: "1fr 1.2fr",
+              background: "white",
+              borderRadius: 32,
+              overflow: "hidden",
+              border: "1.5px solid var(--c-border)",
+              boxShadow: "0 16px 0 rgba(61,46,31,0.04), 0 30px 80px rgba(61,46,31,0.08)",
+            }}>
+              <div style={{
+                background: "linear-gradient(160deg, #FFCB45 0%, #FF8A3D 100%)",
+                padding: "48px 40px",
+                color: "var(--c-text)",
+                position: "relative",
+              }}>
+                <img src="assets/logo.png" alt="" style={{
+                  position: "absolute", top: 20, right: 20,
+                  width: 96, height: 96, borderRadius: "50%",
+                  border: "4px solid white",
+                  opacity: 0.95,
+                  boxShadow: "0 8px 24px rgba(0,0,0,0.15)",
+                  transform: "rotate(8deg)",
+                }} />
+                <span className="sticker" style={{ background: "white", color: "var(--c-text)", marginBottom: 24, display: "inline-block" }}>Tur gratuit</span>
+                <h2 style={{ fontSize: "clamp(32px, 4vw, 44px)", marginTop: 16, marginBottom: 16, color: "var(--c-text)" }}>
+                  Vino să cunoști <br/>locul, copilul tău <br/>va decide singur.
+                </h2>
+                <p style={{ fontSize: 17, marginBottom: 32, color: "rgba(61,46,31,0.85)", textWrap: "pretty" }}>
+                  Lasă-ne datele și te sunăm în maxim 24h pentru a stabili o vizită. Fără promisiuni de înscriere, doar o cafea și un tur al spațiului.
+                </p>
+                <div style={{ display: "flex", flexDirection: "column", gap: 16, fontSize: 15 }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    <span style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.5)", display: "grid", placeItems: "center" }}>📞</span>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>0721 456 789</div>
+                      <div style={{ fontSize: 13, opacity: 0.8 }}>Luni–Vineri, 09:00–19:00</div>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    <span style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.5)", display: "grid", placeItems: "center" }}>✉</span>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>contact@sunnyland.ro</div>
+                      <div style={{ fontSize: 13, opacity: 0.8 }}>Răspundem în câteva ore</div>
+                    </div>
+                  </div>
+                  <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                    <span style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.5)", display: "grid", placeItems: "center" }}>📍</span>
+                    <div>
+                      <div style={{ fontWeight: 700 }}>Strada Macilor 24</div>
+                      <div style={{ fontSize: 13, opacity: 0.8 }}>Sector 1, București</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div style={{ padding: "48px 40px" }}>
+                {sent ? (
+                  <div style={{ textAlign: "center", padding: "40px 0" }}>
+                    <div style={{ fontSize: 64, marginBottom: 16 }}>🎉</div>
+                    <h3 style={{ fontSize: 28, marginBottom: 12 }}>Mulțumim, {form.name || "drag părinte"}!</h3>
+                    <p style={{ color: "var(--c-text-soft)", fontSize: 16 }}>Te sunăm cât de curând ca să stabilim ziua vizitei.</p>
+                    <button onClick={() => { setSent(false); setForm({ name: "", phone: "", child: "", message: "", time: "dimineata" }); }} className="btn btn-secondary" style={{ marginTop: 24 }}>Trimite altă cerere</button>
+                  </div>
+                ) : (
+                  <>
+                    <h3 style={{ fontSize: 28, marginBottom: 8 }}>Programează turul</h3>
+                    <p style={{ color: "var(--c-text-soft)", marginBottom: 28, fontSize: 15 }}>Toate câmpurile sunt opționale, în afară de telefon.</p>
+                    <form onSubmit={(e) => { e.preventDefault(); setSent(true); }}>
+                      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14, marginBottom: 14 }}>
+                        <Field label="Numele tău" v={form.name} on={update("name")} placeholder="ex. Ana Popescu" />
+                        <Field label="Telefon *" v={form.phone} on={update("phone")} placeholder="07xx xxx xxx" required />
+                      </div>
+                      <div style={{ marginBottom: 14 }}>
+                        <Field label="Despre copil" v={form.child} on={update("child")} placeholder="ex. Mihai, clasa a II-a la Școala 195" />
+                      </div>
+                      <div style={{ marginBottom: 18 }}>
+                        <label style={{ fontSize: 13, fontWeight: 600, marginBottom: 10, display: "block", color: "var(--c-text-soft)" }}>Când preferi să fie turul?</label>
+                        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 8 }}>
+                          {[
+                            { v: "dimineata", l: "Dimineața" },
+                            { v: "pranz", l: "La prânz" },
+                            { v: "dupa18", l: "După 18:00" },
+                          ].map(o => (
+                            <button key={o.v} type="button"
+                              onClick={() => setForm({ ...form, time: o.v })}
+                              style={{
+                                padding: "12px 8px", borderRadius: 12,
+                                background: form.time === o.v ? "var(--c-text)" : "var(--c-bg-alt)",
+                                color: form.time === o.v ? "white" : "var(--c-text)",
+                                fontWeight: 600, fontSize: 14,
+                                transition: "all 0.15s",
+                              }}>{o.l}</button>
+                          ))}
+                        </div>
+                      </div>
+                      <div style={{ marginBottom: 22 }}>
+                        <label style={{ fontSize: 13, fontWeight: 600, marginBottom: 6, display: "block", color: "var(--c-text-soft)" }}>Ai vreo întrebare anume?</label>
+                        <textarea value={form.message} onChange={update("message")} rows={3} placeholder="Opțional. Orice ne ajută să-ți răspundem mai bine." style={{
+                          width: "100%", padding: "14px 16px",
+                          borderRadius: 14, border: "1.5px solid var(--c-border)",
+                          fontFamily: "inherit", fontSize: 15, resize: "vertical",
+                          background: "var(--c-bg)",
+                        }} />
+                      </div>
+                      <button type="submit" className="btn btn-primary" style={{ width: "100%", justifyContent: "center", padding: "18px 28px", fontSize: 17 }}>
+                        Trimite cererea →
+                      </button>
+                      <div style={{ fontSize: 12, color: "var(--c-text-muted)", marginTop: 12, textAlign: "center" }}>
+                        Răspundem în maxim 24h. Datele tale nu ajung nicăieri.
+                      </div>
+                    </form>
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    function Footer() {
+      return (
+        <footer style={{ background: "var(--c-text)", color: "rgba(255,255,255,0.85)", padding: "56px 0 32px" }}>
+          <div className="container">
+            <div className="footer-grid" style={{ display: "grid", gridTemplateColumns: "1.4fr 1fr 1fr 1fr", gap: 40, marginBottom: 40 }}>
+              <div>
+                <div style={{ display: "flex", alignItems: "center", gap: 12, fontFamily: "var(--f-display)", fontWeight: 700, fontSize: 22, color: "white", marginBottom: 14 }}>
+                  <img src="assets/logo.png" alt="" style={{
+                    width: 44, height: 44, borderRadius: "50%",
+                    border: "2.5px solid white",
+                    objectFit: "cover",
+                  }} />
+                  Sunnyland
+                </div>
+                <p style={{ fontSize: 14, lineHeight: 1.6, opacity: 0.7 }}>
+                  After-school cu suflet pentru școlari mici. Din 2018 în Sectorul 1, București.
+                </p>
+              </div>
+              <div>
+                <div style={{ fontFamily: "var(--f-display)", fontWeight: 600, color: "white", marginBottom: 14, fontSize: 16 }}>Navighează</div>
+                {["Despre", "Activități", "Galerie", "Părinți", "FAQ"].map(l => (
+                  <a key={l} href={`#${l.toLowerCase()}`} style={{ display: "block", padding: "4px 0", fontSize: 14, opacity: 0.75 }}>{l}</a>
+                ))}
+              </div>
+              <div>
+                <div style={{ fontFamily: "var(--f-display)", fontWeight: 600, color: "white", marginBottom: 14, fontSize: 16 }}>Contact</div>
+                <div style={{ fontSize: 14, opacity: 0.75, lineHeight: 1.8 }}>
+                  0721 456 789<br/>
+                  contact@sunnyland.ro<br/>
+                  Strada Macilor 24<br/>
+                  Sector 1, București
+                </div>
+              </div>
+              <div>
+                <div style={{ fontFamily: "var(--f-display)", fontWeight: 600, color: "white", marginBottom: 14, fontSize: 16 }}>Urmărește-ne</div>
+                <div style={{ display: "flex", gap: 10 }}>
+                  {[
+                    { l: "Instagram", i: "📷" },
+                    { l: "Facebook", i: "👥" },
+                    { l: "TikTok", i: "🎵" },
+                  ].map(s => (
+                    <a key={s.l} href="#" style={{
+                      width: 40, height: 40, borderRadius: 12,
+                      background: "rgba(255,255,255,0.1)",
+                      display: "grid", placeItems: "center",
+                      fontSize: 18, transition: "background 0.15s",
+                    }}
+                      onMouseEnter={e => e.currentTarget.style.background = "var(--c-accent)"}
+                      onMouseLeave={e => e.currentTarget.style.background = "rgba(255,255,255,0.1)"}>
+                      {s.i}
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+            <div style={{ borderTop: "1px solid rgba(255,255,255,0.12)", paddingTop: 20, display: "flex", justifyContent: "space-between", flexWrap: "wrap", gap: 12, fontSize: 13, opacity: 0.6 }}>
+              <div>© 2026 Sunnyland After-School. Toate drepturile rezervate.</div>
+              <div style={{ display: "flex", gap: 20 }}>
+                <a href="#">Politica de confidențialitate</a>
+                <a href="#">Termeni</a>
+              </div>
+            </div>
+          </div>
+        </footer>
+      );
+    }
+
+    /* ── App ── */
+    function App() {
+      return (
+        <>
+          <Nav />
+          <main>
+            <Hero />
+            <Despre />
+            <Oferim />
+            <Galerie />
+            <Parinti />
+            <Faq />
+            <Locatie />
+            <Contact />
+          </main>
+          <Footer />
+        </>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+  </script>
+</body>
+</html>
