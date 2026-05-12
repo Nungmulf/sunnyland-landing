@@ -542,15 +542,15 @@
                   <span className="squiggle">acasă</span>.
                 </h2>
                 <p style={{ fontSize: 18, color: "var(--c-text-soft)", marginBottom: 20, textWrap: "pretty" }}>
-                  Sunnyland s-a născut în 2025 din dorința de a crea copiilor un spațiu care nu se simte ca școala — un loc în care joaca, creativitatea și distracția sunt la ele acasă, iar copiii sunt principalii actori.
+                  Sunnyland s-a născut în 2025 dintr-o întrebare simplă: de ce nu există un loc în care copiii să fie fericiți să meargă în fiecare zi? Nu o școală în plus, nu teme și presiune — ci un spațiu în care joaca, creativitatea și distracția au primul cuvânt.
                 </p>
                 <p style={{ fontSize: 18, color: "var(--c-text-soft)", marginBottom: 32, textWrap: "pretty" }}>
-                  Suntem o echipă mică și unită: două surori fondatoare, un animator de teatru și un profesor de sport. Lucrăm într-o singură grupă, ca fiecare copil să fie văzut și ascultat.
+                  Suntem o echipă mică și unită: două surori fondatoare, un animator de teatru și un profesor de sport. Ne cunoaștem copiii pe nume, le știm preferințele și ne pasă sincer de cum se simt. Lucrăm într-o singură grupă tocmai pentru asta — ca niciun copil să nu se piardă în mulțime.
                 </p>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: 20 }}>
                   {[
-                    { ic: "🏠", t: "Ca acasă, nu ca la școală", d: "Mediu familiar, relaxat, fără presiunea notelor." },
-                    { ic: "🤝", t: "Echipă mică, grijă mare", d: "O singură grupă de 10 copii. Fiecare contează." },
+                    { ic: "🏠", t: "Ca acasă, nu ca la școală", d: "Un mediu cald, relaxat, fără note și fără presiune. Copiii vin cu plăcere — și asta nu e puțin lucru." },
+                    { ic: "🤝", t: "Echipă mică, grijă mare", d: "O singură grupă, maximum 10 copii. Îi vedem pe fiecare, îi ascultăm pe fiecare. Fiecare zi contează." },
                   ].map((v, i) => (
                     <div key={i} style={{ padding: "20px 22px", background: "white", borderRadius: 20, border: "1.5px solid var(--c-border)" }}>
                       <div style={{ fontSize: 28, marginBottom: 8 }}>{v.ic}</div>
@@ -569,12 +569,12 @@
     /* ── Oferim ── */
     function Oferim() {
       const items = [
-        { ic: "📚", t: "Teme & lecții", d: "Copiii își fac temele cu sprijinul echipei. Acasă nu mai rămâne nimic de făcut — doar timp pentru familie.", color: "#FFCB45" },
-        { ic: "🎭", t: "Teatru", d: "Curs susținut de un animator profesionist. Improvizație, scenete, expresivitate — copiii își descoperă vocea.", color: "#7BC9A8" },
-        { ic: "⚽", t: "Sport", d: "Ore de sport cu profesor dedicat. Mișcare, jocuri de echipă, energie consumată cum trebuie.", color: "#FF8A3D" },
-        { ic: "🌳", t: "Joacă în curte", d: "Când vremea permite, copiii ies în curtea locației. Aer liber, joacă liberă, libertate.", color: "#7BC9A8" },
-        { ic: "🍲", t: "Prânz cald + gustare", d: "Mese livrate zilnic de o firmă de catering. Copiii mănâncă împreună, ca o familie.", color: "#FFCB45" },
-        { ic: "🎬", t: "Relaxare & filme", d: "La finalul zilei, copiii se relaxează cu un film sau cu joacă liberă, până vin părinții.", color: "#FF8A3D" },
+        { ic: "📚", t: "Teme & lecții", d: "Știm că temele sunt primul lucru la care se gândesc părinții. La Sunnyland, ele se fac în liniște, cu ajutor dacă e nevoie. Când copilul ajunge acasă, ghiozdanul e gata pentru a doua zi.", color: "#FFCB45" },
+        { ic: "🎭", t: "Teatru", d: "Un animator care știe să scoată ce e mai bun din fiecare copil. Prin joc, scenete și puțin haos controlat, copiii îndrăznesc să se exprime — și descoperă că le place.", color: "#7BC9A8" },
+        { ic: "⚽", t: "Sport", d: "Mișcare, energie, echipă. Un profesor dedicat care transformă orele de după-amiază în ceva așteptat cu nerăbdare. Pentru că un copil obosit în mod plăcut e un copil fericit.", color: "#FF8A3D" },
+        { ic: "🌳", t: "Joacă în curte", d: "Uneori cea mai bună activitate e pur și simplu să alergi. Când vremea e bună, copiii ies afară — și asta spune tot.", color: "#7BC9A8" },
+        { ic: "🍲", t: "Prânz cald + gustare", d: "Mâncare gătită, servită la masă, împreună. Nu fast-food, nu sandvișuri din pungă. O masă adevărată, ca acasă — sau chiar mai bună.", color: "#FFCB45" },
+        { ic: "🎬", t: "Relaxare & filme", d: "Sfârșitul zilei e lent, intenționat. Un film, puțină joacă liberă, conversații. Copiii se decomprimă înainte ca părinții să vină să îi ia — și toată lumea ajunge acasă zâmbind.", color: "#FF8A3D" },
       ];
       return (
         <section id="oferim" className="section" style={{ background: "var(--c-bg-alt)", position: "relative", overflow: "hidden" }}>
