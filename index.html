@@ -262,38 +262,43 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { scrollbar-width: none; }
 
-    /* Service tabs */
-    .service-tabs-bar {
+    /* Service switch */
+    .service-switch-bar {
       position: sticky; top: 73px; z-index: 49;
       background: rgba(255,248,231,0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1.5px solid var(--c-border);
       padding: 12px 0;
     }
-    .service-tabs {
+    .service-switch {
+      position: relative;
       display: inline-flex;
-      background: rgba(0,0,0,0.06);
-      border-radius: 14px;
+      background: var(--c-text);
+      border-radius: 999px;
       padding: 4px;
-      gap: 4px;
     }
-    .service-tab {
-      padding: 10px 24px;
-      border-radius: 11px;
+    .service-switch-thumb {
+      position: absolute;
+      top: 4px; bottom: 4px;
+      border-radius: 999px;
+      background: white;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1), width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .service-switch button {
+      position: relative; z-index: 1;
+      padding: 10px 28px;
+      border-radius: 999px;
       font-weight: 700;
       font-size: 15px;
-      color: var(--c-text-soft);
-      transition: all 0.2s ease;
+      color: rgba(255,255,255,0.55);
+      transition: color 0.25s ease;
       white-space: nowrap;
     }
-    .service-tab:hover { color: var(--c-text); }
-    .service-tab.active {
-      background: white;
-      color: var(--c-text);
-      box-shadow: 0 2px 8px rgba(61,46,31,0.1);
-    }
+    .service-switch button:hover { color: rgba(255,255,255,0.85); }
+    .service-switch button.active { color: var(--c-text); }
     @media (max-width: 520px) {
-      .service-tab { padding: 8px 16px; font-size: 13px; }
+      .service-switch button { padding: 8px 16px; font-size: 13px; }
     }
   </style>
 </head>
@@ -1141,24 +1146,37 @@
 
     /* ── App ── */
     /* ── Service Tabs ── */
-    const SERVICE_TABS = [
-      { id: "afterschool", label: "☀ After-School", icon: "☀" },
-      { id: "summer", label: "🏖 Summer School", icon: "🏖" },
-      { id: "petreceri", label: "🎉 Petreceri Private", icon: "🎉" },
+    const SERVICE_OPTIONS = [
+      { id: "afterschool", label: "After-School" },
+      { id: "summer", label: "Summer School" },
+      { id: "petreceri", label: "Petreceri" },
     ];
 
-    function ServiceTabsBar({ active, onChange }) {
+    function ServiceSwitch({ active, onChange }) {
+      const refs = React.useRef([]);
+      const [thumb, setThumb] = React.useState({ left: 4, width: 0 });
+      const idx = SERVICE_OPTIONS.findIndex(o => o.id === active);
+
+      React.useEffect(() => {
+        const el = refs.current[idx];
+        if (el) {
+          setThumb({ left: el.offsetLeft, width: el.offsetWidth });
+        }
+      }, [idx]);
+
       return (
-        <div className="service-tabs-bar">
+        <div className="service-switch-bar">
           <div className="container" style={{ display: "flex", justifyContent: "center" }}>
-            <div className="service-tabs">
-              {SERVICE_TABS.map(tab => (
+            <div className="service-switch">
+              <div className="service-switch-thumb" style={{ left: thumb.left, width: thumb.width }} />
+              {SERVICE_OPTIONS.map((opt, i) => (
                 <button
-                  key={tab.id}
-                  className={`service-tab${active === tab.id ? " active" : ""}`}
-                  onClick={() => { onChange(tab.id); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  key={opt.id}
+                  ref={el => refs.current[i] = el}
+                  className={active === opt.id ? "active" : ""}
+                  onClick={() => { onChange(opt.id); window.scrollTo({ top: 0, behavior: "smooth" }); }}
                 >
-                  {tab.label}
+                  {opt.label}
                 </button>
               ))}
             </div>
@@ -1680,7 +1698,7 @@
       return (
         <>
           <Nav />
-          <ServiceTabsBar active={service} onChange={setService} />
+          <ServiceSwitch active={service} onChange={setService} />
           <main>
             {service === "afterschool" && (
               <>
