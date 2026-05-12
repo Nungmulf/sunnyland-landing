@@ -261,6 +261,40 @@
 
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { scrollbar-width: none; }
+
+    /* Service tabs */
+    .service-tabs-bar {
+      position: sticky; top: 73px; z-index: 49;
+      background: rgba(255,248,231,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1.5px solid var(--c-border);
+      padding: 12px 0;
+    }
+    .service-tabs {
+      display: inline-flex;
+      background: rgba(0,0,0,0.06);
+      border-radius: 14px;
+      padding: 4px;
+      gap: 4px;
+    }
+    .service-tab {
+      padding: 10px 24px;
+      border-radius: 11px;
+      font-weight: 700;
+      font-size: 15px;
+      color: var(--c-text-soft);
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+    .service-tab:hover { color: var(--c-text); }
+    .service-tab.active {
+      background: white;
+      color: var(--c-text);
+      box-shadow: 0 2px 8px rgba(61,46,31,0.1);
+    }
+    @media (max-width: 520px) {
+      .service-tab { padding: 8px 16px; font-size: 13px; }
+    }
   </style>
 </head>
 <body>
@@ -1106,19 +1140,581 @@
     }
 
     /* ── App ── */
+    /* ── Service Tabs ── */
+    const SERVICE_TABS = [
+      { id: "afterschool", label: "☀ After-School", icon: "☀" },
+      { id: "summer", label: "🏖 Summer School", icon: "🏖" },
+      { id: "petreceri", label: "🎉 Petreceri Private", icon: "🎉" },
+    ];
+
+    function ServiceTabsBar({ active, onChange }) {
+      return (
+        <div className="service-tabs-bar">
+          <div className="container" style={{ display: "flex", justifyContent: "center" }}>
+            <div className="service-tabs">
+              {SERVICE_TABS.map(tab => (
+                <button
+                  key={tab.id}
+                  className={`service-tab${active === tab.id ? " active" : ""}`}
+                  onClick={() => { onChange(tab.id); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                >
+                  {tab.label}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    /* ── Summer School Hero ── */
+    function SummerHero() {
+      return (
+        <section id="top" style={{ position: "relative", overflow: "hidden", paddingBottom: 80 }}>
+          <svg viewBox="0 0 800 600" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0 }} aria-hidden="true">
+            <defs>
+              <radialGradient id="sunSummer" cx="50%" cy="50%">
+                <stop offset="0%" stopColor="#FFE17A" />
+                <stop offset="100%" stopColor="#FFCB45" />
+              </radialGradient>
+            </defs>
+            <circle cx="680" cy="100" r="120" fill="url(#sunSummer)" opacity="0.95" />
+            <circle cx="720" cy="80" r="60" fill="#FFE17A" opacity="0.3" />
+            <path d="M -50 480 Q 200 400 400 460 T 850 440 L 850 700 L -50 700 Z" fill="#5BA8E8" opacity="0.2" />
+            <path d="M -50 520 Q 250 450 500 510 T 850 500 L 850 700 L -50 700 Z" fill="#5BA8E8" opacity="0.35" />
+          </svg>
+          <div className="container" style={{ position: "relative", zIndex: 1, paddingTop: 60, paddingBottom: 40 }}>
+            <div className="hero-grid" style={{
+              display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 64, alignItems: "center",
+            }}>
+              <div>
+                <span className="eyebrow" style={{ background: "#5BA8E8" }}>🏖 Vara la Sunnyland</span>
+                <h1 style={{
+                  fontSize: "clamp(44px, 6.5vw, 80px)",
+                  margin: "20px 0 24px",
+                  lineHeight: 1,
+                }}>
+                  O vară plină de{" "}
+                  <span className="squiggle orange" style={{ color: "#5BA8E8" }}>aventuri</span>{" "}
+                  și prieteni noi.
+                </h1>
+                <p style={{ fontSize: 20, color: "var(--c-text-soft)", maxWidth: 520, marginBottom: 36, textWrap: "pretty" }}>
+                  Summer School Sunnyland: 8 săptămâni de activități creative, sport, excursii și joacă — pentru copii de 6–12 ani. Fără teme, doar distracție cu cap.
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: 32 }}>
+                  <a href="#contact" className="btn btn-primary" style={{ background: "#5BA8E8", boxShadow: "0 6px 0 #3A7CC0, 0 12px 24px rgba(91,168,232,0.3)" }}>
+                    Rezervă locul pentru vară →
+                  </a>
+                  <a href="#oferim-summer" className="btn btn-ghost">
+                    Vezi programul săptămânal
+                  </a>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 28, color: "var(--c-text-soft)", fontSize: 15, fontWeight: 600 }}>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "#5BA8E8", fontSize: 20 }}>✓</span> Iunie – August
+                  </span>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "#5BA8E8", fontSize: 20 }}>✓</span> Excursii săptămânale
+                  </span>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "#5BA8E8", fontSize: 20 }}>✓</span> Grupe de max 12 copii
+                  </span>
+                </div>
+              </div>
+              <div style={{ position: "relative" }} className="hero-media">
+                <div className="ph" style={{
+                  aspectRatio: "4/5", borderRadius: 28,
+                  transform: "rotate(2deg)",
+                  boxShadow: "0 12px 0 rgba(61,46,31,0.08), 0 30px 60px rgba(61,46,31,0.12)",
+                  border: "6px solid white",
+                  "--ph-bg": "#B8DEFF",
+                }}>
+                  [ photo: copii la piscină / excursie ]
+                </div>
+                <div className="sticker" style={{
+                  position: "absolute", top: -18, left: -22,
+                  background: "#5BA8E8", color: "white",
+                  transform: "rotate(-8deg)", fontSize: 14,
+                  boxShadow: "0 6px 20px rgba(91,168,232,0.4)",
+                  padding: "10px 18px",
+                }}>
+                  🌊 8 săptămâni de vară
+                </div>
+                <div className="sticker" style={{
+                  position: "absolute", bottom: 40, right: -28,
+                  background: "white", color: "var(--c-text)",
+                  transform: "rotate(5deg)", fontSize: 14,
+                  border: "2px solid var(--c-text)",
+                  boxShadow: "0 4px 0 var(--c-text)",
+                  padding: "10px 18px",
+                }}>
+                  🍉 Prânz + gustări incluse
+                </div>
+                <div className="sticker" style={{
+                  position: "absolute", top: "45%", left: -36,
+                  background: "var(--c-primary)", color: "var(--c-text)",
+                  transform: "rotate(-4deg)", fontSize: 14,
+                  boxShadow: "0 6px 20px rgba(255,203,69,0.4)",
+                  padding: "10px 18px",
+                }}>
+                  🏕 Excursii în natură
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Stats strip */}
+          <div className="container" style={{ position: "relative", zIndex: 1, marginTop: 60 }}>
+            <div className="stats-strip" style={{
+              display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
+              background: "white", borderRadius: 24, padding: "28px 16px",
+              border: "1.5px solid var(--c-border)",
+              boxShadow: "0 8px 0 rgba(61,46,31,0.04), 0 20px 50px rgba(61,46,31,0.06)",
+            }}>
+              {[
+                { n: "6 veri", l: "de tabere de zi Sunnyland" },
+                { n: "180+", l: "copii fericiți în fiecare vară" },
+                { n: "1:8", l: "raport educator / copii" },
+                { n: "08:00–17:00", l: "program L–V, tot vara" },
+              ].map((s, i) => (
+                <div key={i} style={{ textAlign: "center", padding: "8px 12px", borderLeft: i ? "1px solid var(--c-border)" : "none" }}>
+                  <div style={{ fontFamily: "var(--f-display)", fontSize: "clamp(22px, 3vw, 32px)", fontWeight: 700, color: "#5BA8E8" }}>{s.n}</div>
+                  <div style={{ fontSize: 13, color: "var(--c-text-soft)", marginTop: 4 }}>{s.l}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── Summer Oferim ── */
+    function SummerOferim() {
+      const items = [
+        { ic: "🏊", t: "Sport & apă", d: "Piscină, jocuri cu apă, minifotbal, baschet și gimnastică în aer liber. Mișcare în fiecare zi.", color: "#5BA8E8" },
+        { ic: "🎨", t: "Ateliere creative", d: "Pictură, ceramică, tie-dye, construcții, experimente. Fiecare săptămână are altă temă.", color: "#FF8A3D" },
+        { ic: "🏕", t: "Excursii săptămânale", d: "O zi pe săptămână în natură: pădure, fermă, muzeu interactiv, grădină botanică.", color: "#7BC9A8" },
+        { ic: "🎭", t: "Teatru & muzică", d: "Improvizație, scenete, cor. La finalul verii, spectacol pentru părinți.", color: "#FFCB45" },
+        { ic: "👨‍🍳", t: "Atelier de gătit", d: "Rețete simple, sigure, delicioase. Copiii gătesc și mănâncă împreună.", color: "#FF8A3D" },
+        { ic: "🍲", t: "Prânz + 2 gustări", d: "Meniu echilibrat, gătit zilnic. Fructe, apă, gustări sănătoase toată ziua.", color: "#7BC9A8" },
+      ];
+      return (
+        <section id="oferim-summer" className="section" style={{ background: "var(--c-bg-alt)", position: "relative", overflow: "hidden" }}>
+          <div className="container" style={{ position: "relative" }}>
+            <div className="section-head center">
+              <span className="eyebrow" style={{ background: "#5BA8E8" }}>Program de vară</span>
+              <h2 className="section-title" style={{ marginTop: 16 }}>
+                Ce facem într-o <span className="squiggle">săptămână</span> de vară?
+              </h2>
+              <p className="section-lede">
+                Fiecare săptămână are o temă nouă. Copiii explorează, creează și se joacă — fără ecrane, fără teme.
+              </p>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 20 }}>
+              {items.map((it, i) => (
+                <div key={i} className="card card-shadow" style={{
+                  padding: "32px 28px",
+                  transition: "transform 0.2s ease",
+                }}
+                  onMouseEnter={e => e.currentTarget.style.transform = "translateY(-4px) rotate(-0.5deg)"}
+                  onMouseLeave={e => e.currentTarget.style.transform = "none"}>
+                  <div style={{
+                    width: 56, height: 56, borderRadius: 16,
+                    background: it.color, display: "grid", placeItems: "center",
+                    fontSize: 28, marginBottom: 20,
+                    boxShadow: `0 6px 0 ${it.color}80`,
+                  }}>{it.ic}</div>
+                  <h3 style={{ fontSize: 22, marginBottom: 10 }}>{it.t}</h3>
+                  <p style={{ color: "var(--c-text-soft)", fontSize: 15.5 }}>{it.d}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Teme săptămânale */}
+            <div style={{ marginTop: 80 }}>
+              <h3 style={{ fontSize: 28, marginBottom: 28, textAlign: "center" }}>
+                Temele celor 8 săptămâni
+              </h3>
+              <div style={{
+                display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 12,
+                background: "white", borderRadius: 24, padding: 24,
+                border: "1.5px solid var(--c-border)",
+              }}>
+                {[
+                  { t: "S1", l: "Exploratori în natură", c: "#7BC9A8" },
+                  { t: "S2", l: "Artiști fără limite", c: "#FF8A3D" },
+                  { t: "S3", l: "Știința e cool", c: "#5BA8E8" },
+                  { t: "S4", l: "Olimpiada Sunnyland", c: "#FFCB45" },
+                  { t: "S5", l: "Micii bucătari", c: "#FF8A3D" },
+                  { t: "S6", l: "Teatru & muzică", c: "#7BC9A8" },
+                  { t: "S7", l: "Aventură & camping", c: "#5BA8E8" },
+                  { t: "S8", l: "Show de final", c: "#FFCB45" },
+                ].map((s, i) => (
+                  <div key={i} style={{ position: "relative", paddingTop: 28 }}>
+                    <div style={{
+                      position: "absolute", top: 0, left: 0, right: 0,
+                      height: 12, background: s.c, borderRadius: 6,
+                    }} />
+                    <div style={{ fontFamily: "var(--f-display)", fontWeight: 700, fontSize: 20, color: "var(--c-text)" }}>{s.t}</div>
+                    <div style={{ fontSize: 14, color: "var(--c-text-soft)", marginTop: 4 }}>{s.l}</div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+          <style>{`
+            @media (max-width: 720px) {
+              #oferim-summer .timeline { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
+            }
+          `}</style>
+        </section>
+      );
+    }
+
+    /* ── Summer FAQ ── */
+    function SummerFaq() {
+      const [open, setOpen] = React.useState(0);
+      const qs = [
+        { q: "Ce vârste acceptați vara?", a: "6–12 ani. Grupele sunt împărțite pe vârste: 6-8 ani și 9-12 ani." },
+        { q: "Care e programul zilnic?", a: "Luni–Vineri, 08:00–17:00. Poți aduce copilul oricând între 08:00 și 09:00, și îl iei între 16:00 și 17:00." },
+        { q: "Câte săptămâni pot alege?", a: "De la 1 săptămână la toate 8. Fiecare săptămână are temă diferită, deci poți alege ce-l interesează pe copil." },
+        { q: "Cât costă?", a: "450 lei/săptămână sau pachet 4 săptămâni la 1600 lei. Include prânzul, gustările, materialele și excursiile." },
+        { q: "Ce include prânzul?", a: "Prânz cald gătit zilnic + 2 gustări (fructe, sandvișuri) + apă nelimitată. Adaptăm pentru alergii." },
+        { q: "Ce se întâmplă când plouă?", a: "Avem program de interior complet: ateliere, jocuri de societate, film, teatru. Nicio zi nu e pierdută." },
+      ];
+      return (
+        <section id="faq" className="section" style={{ background: "var(--c-bg)" }}>
+          <div className="container" style={{ maxWidth: 880 }}>
+            <div className="section-head center">
+              <span className="eyebrow" style={{ background: "#5BA8E8" }}>Întrebări frecvente</span>
+              <h2 className="section-title" style={{ marginTop: 16 }}>
+                Întrebări despre Summer School
+              </h2>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {qs.map((it, i) => {
+                const isOpen = open === i;
+                return (
+                  <div key={i} style={{
+                    background: isOpen ? "white" : "rgba(255,255,255,0.6)",
+                    borderRadius: 20,
+                    border: `1.5px solid ${isOpen ? "#5BA8E8" : "var(--c-border)"}`,
+                    overflow: "hidden",
+                    transition: "all 0.2s ease",
+                  }}>
+                    <button onClick={() => setOpen(isOpen ? -1 : i)} style={{
+                      width: "100%", textAlign: "left",
+                      padding: "22px 28px",
+                      display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16,
+                      fontSize: 18, fontWeight: 600, color: "var(--c-text)",
+                      fontFamily: "var(--f-body)",
+                    }}>
+                      <span>{it.q}</span>
+                      <span style={{
+                        width: 36, height: 36, flexShrink: 0,
+                        borderRadius: "50%",
+                        background: isOpen ? "#5BA8E8" : "var(--c-bg-alt)",
+                        color: isOpen ? "white" : "var(--c-text)",
+                        display: "grid", placeItems: "center",
+                        fontSize: 22, fontWeight: 700,
+                        transition: "all 0.2s ease",
+                        transform: isOpen ? "rotate(45deg)" : "none",
+                      }}>+</span>
+                    </button>
+                    {isOpen && (
+                      <div style={{ padding: "0 28px 24px", color: "var(--c-text-soft)", fontSize: 16, lineHeight: 1.6, textWrap: "pretty" }}>
+                        {it.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── Petreceri Hero ── */
+    function PetreceriHero() {
+      return (
+        <section id="top" style={{ position: "relative", overflow: "hidden", paddingBottom: 80 }}>
+          <svg viewBox="0 0 800 600" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", zIndex: 0 }} aria-hidden="true">
+            <defs>
+              <radialGradient id="confetti1" cx="50%" cy="50%">
+                <stop offset="0%" stopColor="#E84C82" />
+                <stop offset="100%" stopColor="#FF6B9D" />
+              </radialGradient>
+            </defs>
+            <circle cx="680" cy="120" r="80" fill="url(#confetti1)" opacity="0.3" />
+            <circle cx="120" cy="100" r="50" fill="#FFCB45" opacity="0.3" />
+            <circle cx="400" cy="500" r="120" fill="#7B5DC9" opacity="0.1" />
+            <path d="M -50 500 Q 200 420 400 470 T 850 460 L 850 700 L -50 700 Z" fill="#E84C82" opacity="0.15" />
+          </svg>
+          <div className="container" style={{ position: "relative", zIndex: 1, paddingTop: 60, paddingBottom: 40 }}>
+            <div className="hero-grid" style={{
+              display: "grid", gridTemplateColumns: "1.1fr 1fr", gap: 64, alignItems: "center",
+            }}>
+              <div>
+                <span className="eyebrow" style={{ background: "#E84C82" }}>🎉 Petreceri la Sunnyland</span>
+                <h1 style={{
+                  fontSize: "clamp(44px, 6.5vw, 80px)",
+                  margin: "20px 0 24px",
+                  lineHeight: 1,
+                }}>
+                  Ziua copilului tău,{" "}
+                  <span className="squiggle" style={{ color: "#E84C82" }}>magic</span>{"ă "}
+                  și fără stres.
+                </h1>
+                <p style={{ fontSize: 20, color: "var(--c-text-soft)", maxWidth: 520, marginBottom: 36, textWrap: "pretty" }}>
+                  Organizăm petreceri private pentru 10–25 copii. Tu te bucuri de momentul copilului tău, noi ne ocupăm de tot: spațiu, animatori, tort, decor.
+                </p>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: 32 }}>
+                  <a href="#contact" className="btn btn-primary" style={{ background: "#E84C82", boxShadow: "0 6px 0 #B5345E, 0 12px 24px rgba(232,76,130,0.3)" }}>
+                    Rezervă o dată →
+                  </a>
+                  <a href="#pachete" className="btn btn-ghost">
+                    Vezi pachetele
+                  </a>
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 28, color: "var(--c-text-soft)", fontSize: 15, fontWeight: 600 }}>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "#E84C82", fontSize: 20 }}>✓</span> Weekend & după-amiaza
+                  </span>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "#E84C82", fontSize: 20 }}>✓</span> Tort & candy bar inclus
+                  </span>
+                  <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                    <span style={{ color: "#E84C82", fontSize: 20 }}>✓</span> Teme personalizate
+                  </span>
+                </div>
+              </div>
+              <div style={{ position: "relative" }} className="hero-media">
+                <div className="ph" style={{
+                  aspectRatio: "4/5", borderRadius: 28,
+                  transform: "rotate(2deg)",
+                  boxShadow: "0 12px 0 rgba(61,46,31,0.08), 0 30px 60px rgba(61,46,31,0.12)",
+                  border: "6px solid white",
+                  "--ph-bg": "#FFD0E0",
+                }}>
+                  [ photo: petrecere cu baloane și copii ]
+                </div>
+                <div className="sticker" style={{
+                  position: "absolute", top: -18, left: -22,
+                  background: "#E84C82", color: "white",
+                  transform: "rotate(-8deg)", fontSize: 14,
+                  boxShadow: "0 6px 20px rgba(232,76,130,0.4)",
+                  padding: "10px 18px",
+                }}>
+                  🎂 De la 10 copii
+                </div>
+                <div className="sticker" style={{
+                  position: "absolute", bottom: 40, right: -28,
+                  background: "white", color: "var(--c-text)",
+                  transform: "rotate(5deg)", fontSize: 14,
+                  border: "2px solid var(--c-text)",
+                  boxShadow: "0 4px 0 var(--c-text)",
+                  padding: "10px 18px",
+                }}>
+                  🎈 Decor tematic inclus
+                </div>
+                <div className="sticker" style={{
+                  position: "absolute", top: "45%", left: -36,
+                  background: "#7B5DC9", color: "white",
+                  transform: "rotate(-4deg)", fontSize: 14,
+                  boxShadow: "0 6px 20px rgba(123,93,201,0.4)",
+                  padding: "10px 18px",
+                }}>
+                  🎭 Animatori profesioniști
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── Petreceri Pachete ── */
+    function PetreceriPachete() {
+      const pachete = [
+        {
+          name: "Mini Party",
+          price: "1200 lei",
+          kids: "10–15 copii",
+          color: "var(--c-primary)",
+          features: ["2 ore de distracție", "1 animator", "Candy bar simplu", "Decor baloane", "Muzică & jocuri", "Foto amintire grup"],
+        },
+        {
+          name: "Super Party",
+          price: "1800 lei",
+          kids: "15–20 copii",
+          color: "#E84C82",
+          popular: true,
+          features: ["3 ore de distracție", "2 animatori", "Candy bar premium", "Decor tematic la alegere", "Face painting", "Mini-disco", "Foto amintire + diplome", "Tort inclus"],
+        },
+        {
+          name: "Mega Party",
+          price: "2500 lei",
+          kids: "20–25 copii",
+          color: "#7B5DC9",
+          features: ["4 ore de distracție", "3 animatori", "Candy bar deluxe", "Decor complet personalizat", "Face painting + baloane modelaj", "Spectacol magie / bubbles", "Foto + video amintire", "Tort premium inclus", "Invitații personalizate"],
+        },
+      ];
+      return (
+        <section id="pachete" className="section" style={{ background: "var(--c-bg-alt)" }}>
+          <div className="container">
+            <div className="section-head center">
+              <span className="eyebrow" style={{ background: "#E84C82" }}>Pachete</span>
+              <h2 className="section-title" style={{ marginTop: 16 }}>
+                Alege pachetul potrivit
+              </h2>
+              <p className="section-lede">
+                Toate pachetele includ spațiul, curățenia și coordonarea completă. Tu vii, te bucuri, pleci.
+              </p>
+            </div>
+            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, alignItems: "start" }}>
+              {pachete.map((p, i) => (
+                <div key={i} className="card card-shadow" style={{
+                  padding: "36px 32px",
+                  borderTop: `6px solid ${p.color}`,
+                  position: "relative",
+                  transform: p.popular ? "scale(1.03)" : "none",
+                }}>
+                  {p.popular && (
+                    <div className="sticker" style={{
+                      position: "absolute", top: -16, right: 20,
+                      background: p.color, color: "white",
+                      transform: "rotate(3deg)",
+                      padding: "8px 16px",
+                    }}>⭐ Cel mai popular</div>
+                  )}
+                  <h3 style={{ fontSize: 24, marginBottom: 4 }}>{p.name}</h3>
+                  <div style={{ fontSize: 14, color: "var(--c-text-soft)", marginBottom: 16 }}>{p.kids}</div>
+                  <div style={{ fontFamily: "var(--f-display)", fontSize: 36, fontWeight: 700, color: p.color, marginBottom: 24 }}>{p.price}</div>
+                  <div style={{ display: "flex", flexDirection: "column", gap: 10, marginBottom: 28 }}>
+                    {p.features.map((f, j) => (
+                      <div key={j} style={{ display: "flex", alignItems: "center", gap: 10, fontSize: 15, color: "var(--c-text-soft)" }}>
+                        <span style={{ color: p.color, fontSize: 16, fontWeight: 700 }}>✓</span> {f}
+                      </div>
+                    ))}
+                  </div>
+                  <a href="#contact" className="btn btn-primary" style={{
+                    width: "100%", justifyContent: "center",
+                    background: p.color,
+                    boxShadow: `0 6px 0 ${p.color}99, 0 12px 24px ${p.color}40`,
+                  }}>Rezervă →</a>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── Petreceri FAQ ── */
+    function PetreceriFaq() {
+      const [open, setOpen] = React.useState(0);
+      const qs = [
+        { q: "Când pot organiza petrecerea?", a: "Sâmbătă și duminică, toată ziua, sau în timpul săptămânii după ora 17:00. Rezervă cu minim 2 săptămâni înainte." },
+        { q: "Pot aduce tort propriu?", a: "Da, dar pachetele Super și Mega includ deja tortul. Dacă preferi tort propriu, facem o reducere." },
+        { q: "Ce teme sunt disponibile?", a: "Prințese, supereroi, pirați, safari, spațiu cosmic, unicorni, Lego, știință nebună — sau orice altă temă la cerere." },
+        { q: "Pot rămâne părinții?", a: "Absolut! Avem un spațiu separat cu cafea și gustări pentru adulți, sau puteți participa alături de copii." },
+        { q: "Ce se întâmplă dacă plouă?", a: "Totul e în interior — sala noastră de 80mp e perfectă indiferent de vreme. Avem și curte pentru zilele frumoase." },
+      ];
+      return (
+        <section className="section" style={{ background: "var(--c-bg)" }}>
+          <div className="container" style={{ maxWidth: 880 }}>
+            <div className="section-head center">
+              <span className="eyebrow" style={{ background: "#7B5DC9" }}>Întrebări frecvente</span>
+              <h2 className="section-title" style={{ marginTop: 16 }}>
+                Despre petrecerile noastre
+              </h2>
+            </div>
+            <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
+              {qs.map((it, i) => {
+                const isOpen = open === i;
+                return (
+                  <div key={i} style={{
+                    background: isOpen ? "white" : "rgba(255,255,255,0.6)",
+                    borderRadius: 20,
+                    border: `1.5px solid ${isOpen ? "#E84C82" : "var(--c-border)"}`,
+                    overflow: "hidden",
+                    transition: "all 0.2s ease",
+                  }}>
+                    <button onClick={() => setOpen(isOpen ? -1 : i)} style={{
+                      width: "100%", textAlign: "left",
+                      padding: "22px 28px",
+                      display: "flex", justifyContent: "space-between", alignItems: "center", gap: 16,
+                      fontSize: 18, fontWeight: 600, color: "var(--c-text)",
+                      fontFamily: "var(--f-body)",
+                    }}>
+                      <span>{it.q}</span>
+                      <span style={{
+                        width: 36, height: 36, flexShrink: 0,
+                        borderRadius: "50%",
+                        background: isOpen ? "#E84C82" : "var(--c-bg-alt)",
+                        color: isOpen ? "white" : "var(--c-text)",
+                        display: "grid", placeItems: "center",
+                        fontSize: 22, fontWeight: 700,
+                        transition: "all 0.2s ease",
+                        transform: isOpen ? "rotate(45deg)" : "none",
+                      }}>+</span>
+                    </button>
+                    {isOpen && (
+                      <div style={{ padding: "0 28px 24px", color: "var(--c-text-soft)", fontSize: 16, lineHeight: 1.6, textWrap: "pretty" }}>
+                        {it.a}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+      );
+    }
+
+    /* ── App ── */
     function App() {
+      const [service, setService] = React.useState("afterschool");
       return (
         <>
           <Nav />
+          <ServiceTabsBar active={service} onChange={setService} />
           <main>
-            <Hero />
-            <Despre />
-            <Oferim />
-            <Galerie />
-            <Parinti />
-            <Faq />
-            <Locatie />
-            <Contact />
+            {service === "afterschool" && (
+              <>
+                <Hero />
+                <Despre />
+                <Oferim />
+                <Galerie />
+                <Parinti />
+                <Faq />
+                <Locatie />
+                <Contact />
+              </>
+            )}
+            {service === "summer" && (
+              <>
+                <SummerHero />
+                <SummerOferim />
+                <Galerie />
+                <Parinti />
+                <SummerFaq />
+                <Locatie />
+                <Contact />
+              </>
+            )}
+            {service === "petreceri" && (
+              <>
+                <PetreceriHero />
+                <PetreceriPachete />
+                <Galerie />
+                <PetreceriFaq />
+                <Locatie />
+                <Contact />
+              </>
+            )}
           </main>
           <Footer />
         </>
