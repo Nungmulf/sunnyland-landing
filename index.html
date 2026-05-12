@@ -435,13 +435,13 @@
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 28, color: "var(--c-text-soft)", fontSize: 15, fontWeight: 600 }}>
                   <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ color: "var(--c-secondary-deep)", fontSize: 20 }}>✓</span> Masă caldă + gustare incluse
+                    <span style={{ color: "var(--c-secondary-deep)", fontSize: 20 }}>✓</span> Prânz & gustare incluse
                   </span>
                   <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ color: "var(--c-secondary-deep)", fontSize: 20 }}>✓</span> Teatru, sport & joacă liberă
+                    <span style={{ color: "var(--c-secondary-deep)", fontSize: 20 }}>✓</span> Transport asigurat
                   </span>
                   <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ color: "var(--c-secondary-deep)", fontSize: 20 }}>✓</span> Program 12:00 – 18:00
+                    <span style={{ color: "var(--c-secondary-deep)", fontSize: 20 }}>✓</span> Teatru, sport & joacă
                   </span>
                 </div>
               </div>
@@ -573,7 +573,7 @@
         { ic: "🎭", t: "Teatru", d: "Curs susținut de un animator profesionist. Improvizație, scenete, expresivitate — copiii își descoperă vocea.", color: "#7BC9A8" },
         { ic: "⚽", t: "Sport", d: "Ore de sport cu profesor dedicat. Mișcare, jocuri de echipă, energie consumată cum trebuie.", color: "#FF8A3D" },
         { ic: "🌳", t: "Joacă în curte", d: "Când vremea permite, copiii ies în curtea locației. Aer liber, joacă liberă, libertate.", color: "#7BC9A8" },
-        { ic: "🍲", t: "Prânz cald + gustare", d: "Masă caldă la sosire și gustare după teme. Copiii mănâncă împreună, ca o familie.", color: "#FFCB45" },
+        { ic: "🍲", t: "Prânz cald + gustare", d: "Mese livrate zilnic de o firmă de catering. Copiii mănâncă împreună, ca o familie.", color: "#FFCB45" },
         { ic: "🎬", t: "Relaxare & filme", d: "La finalul zilei, copiii se relaxează cu un film sau cu joacă liberă, până vin părinții.", color: "#FF8A3D" },
       ];
       return (
@@ -863,10 +863,10 @@
                 </p>
                 <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
                   {[
-                    { ic: "📍", t: "Strada Săbăreni 9, Sector 6", d: "București" },
+                    { ic: "📍", t: "Str. Alexandru Ioan Cuza 1", d: "077190 Voluntari, Ilfov" },
                     { ic: "🏡", t: "Locație cu curte", d: "Spațiu interior + curte pentru joacă în aer liber" },
-                    { ic: "🕐", t: "Program L–V, 12:00–18:00", d: "Copiii vin de la școală, pleacă seara" },
-                    { ic: "🛡", t: "Mediu sigur", d: "Predarea copilului doar către persoane autorizate" },
+                    { ic: "🚗", t: "Transport asigurat", d: "Ne ocupăm de transport sau părinții pot veni cu copiii" },
+                    { ic: "🍽", t: "Mese livrate de catering", d: "Prânz cald + gustare, livrate zilnic de firmă de catering" },
                   ].map((it, i) => (
                     <div key={i} style={{ display: "flex", gap: 16, alignItems: "flex-start" }}>
                       <div style={{
@@ -917,8 +917,8 @@
                     boxShadow: "0 8px 20px rgba(0,0,0,0.1)",
                   }}>
                     <div>
-                      <div style={{ fontWeight: 700, fontSize: 14 }}>Strada Săbăreni 9</div>
-                      <div style={{ fontSize: 12, color: "var(--c-text-soft)" }}>Sector 6, București</div>
+                      <div style={{ fontWeight: 700, fontSize: 14 }}>Str. Alexandru Ioan Cuza 1</div>
+                      <div style={{ fontSize: 12, color: "var(--c-text-soft)" }}>077190 Voluntari, Ilfov</div>
                     </div>
                     <a href="https://www.google.com/maps/place/Sunny+Land+Kids/@44.4995298,26.1299922,836m" target="_blank" rel="noopener" className="btn btn-ghost" style={{ padding: "8px 14px", fontSize: 13, color: "var(--c-accent)" }}>Deschide harta →</a>
                   </div>
@@ -991,22 +991,22 @@
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                     <span style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.5)", display: "grid", placeItems: "center" }}>📞</span>
                     <div>
-                      <div style={{ fontWeight: 700 }}>Telefon — în curând</div>
-                      <div style={{ fontSize: 13, opacity: 0.8 }}>Contactați-ne pe email</div>
+                      <div style={{ fontWeight: 700 }}>Adda: 0724 301 160</div>
+                      <div style={{ fontWeight: 700 }}>Monica: 0723 506 199</div>
                     </div>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                     <span style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.5)", display: "grid", placeItems: "center" }}>✉</span>
                     <div>
-                      <div style={{ fontWeight: 700 }}>contact@sunnyland.ro</div>
+                      <div style={{ fontWeight: 700 }}>sunnyland24@gmail.com</div>
                       <div style={{ fontSize: 13, opacity: 0.8 }}>Răspundem în câteva ore</div>
                     </div>
                   </div>
                   <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                     <span style={{ width: 36, height: 36, borderRadius: "50%", background: "rgba(255,255,255,0.5)", display: "grid", placeItems: "center" }}>📍</span>
                     <div>
-                      <div style={{ fontWeight: 700 }}>Strada Săbăreni 9</div>
-                      <div style={{ fontSize: 13, opacity: 0.8 }}>Sector 6, București</div>
+                      <div style={{ fontWeight: 700 }}>Str. Alexandru Ioan Cuza 1</div>
+                      <div style={{ fontSize: 13, opacity: 0.8 }}>077190 Voluntari, Ilfov</div>
                     </div>
                   </div>
                 </div>
@@ -1092,7 +1092,7 @@
                   Sunnyland
                 </div>
                 <p style={{ fontSize: 14, lineHeight: 1.6, opacity: 0.7 }}>
-                  After-school cu suflet pentru școlari mici. Din 2025, în Sectorul 6, București.
+                  After-school cu suflet pentru școlari mici. Din 2025, în Voluntari, Ilfov.
                 </p>
               </div>
               <div>
@@ -1104,20 +1104,21 @@
               <div>
                 <div style={{ fontFamily: "var(--f-display)", fontWeight: 600, color: "white", marginBottom: 14, fontSize: 16 }}>Contact</div>
                 <div style={{ fontSize: 14, opacity: 0.75, lineHeight: 1.8 }}>
-                  contact@sunnyland.ro<br/>
-                  Strada Săbăreni 9<br/>
-                  Sector 6, București
+                  Adda: 0724 301 160<br/>
+                  Monica: 0723 506 199<br/>
+                  sunnyland24@gmail.com<br/>
+                  Str. Al. I. Cuza 1, Voluntari
                 </div>
               </div>
               <div>
                 <div style={{ fontFamily: "var(--f-display)", fontWeight: 600, color: "white", marginBottom: 14, fontSize: 16 }}>Urmărește-ne</div>
                 <div style={{ display: "flex", gap: 10 }}>
                   {[
-                    { l: "Instagram", i: "📷" },
-                    { l: "Facebook", i: "👥" },
-                    { l: "TikTok", i: "🎵" },
+                    { l: "Facebook", i: "👥", url: "https://www.facebook.com/profile.php?id=61568347480056" },
+                    { l: "Instagram", i: "📷", url: "https://www.instagram.com/sunny_land_kids" },
+                    { l: "TikTok", i: "🎵", url: "https://www.tiktok.com/@sunny_land_kids" },
                   ].map(s => (
-                    <a key={s.l} href="#" style={{
+                    <a key={s.l} href={s.url} target="_blank" rel="noopener" style={{
                       width: 40, height: 40, borderRadius: 12,
                       background: "rgba(255,255,255,0.1)",
                       display: "grid", placeItems: "center",
