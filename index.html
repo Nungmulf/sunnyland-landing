@@ -1471,7 +1471,7 @@
                   și fără stres.
                 </h1>
                 <p style={{ fontSize: 20, color: "var(--c-text-soft)", maxWidth: 520, marginBottom: 36, textWrap: "pretty" }}>
-                  Organizăm petreceri private pentru 10–25 copii. Tu te bucuri de momentul copilului tău, noi ne ocupăm de tot: spațiu, animatori, tort, decor.
+                  Sărbătorește ziua copilului tău desculț pe iarbă, într-o curte de 900 mp cu loc de joacă, foișor, terasă și spațiu pentru gonflabile. Tu te bucuri de moment, noi ne ocupăm de tot.
                 </p>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 14, marginBottom: 32 }}>
                   <a href="#contact" className="btn btn-primary" style={{ background: "#E84C82", boxShadow: "0 6px 0 #B5345E, 0 12px 24px rgba(232,76,130,0.3)" }}>
@@ -1483,13 +1483,13 @@
                 </div>
                 <div style={{ display: "flex", flexWrap: "wrap", gap: 28, color: "var(--c-text-soft)", fontSize: 15, fontWeight: 600 }}>
                   <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ color: "#E84C82", fontSize: 20 }}>✓</span> Weekend & după-amiaza
+                    <span style={{ color: "#E84C82", fontSize: 20 }}>✓</span> Loc de joacă interior + exterior
                   </span>
                   <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ color: "#E84C82", fontSize: 20 }}>✓</span> Tort & candy bar inclus
+                    <span style={{ color: "#E84C82", fontSize: 20 }}>✓</span> Cinema & karaoke
                   </span>
                   <span style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                    <span style={{ color: "#E84C82", fontSize: 20 }}>✓</span> Teme personalizate
+                    <span style={{ color: "#E84C82", fontSize: 20 }}>✓</span> Grătar disponibil
                   </span>
                 </div>
               </div>
@@ -1510,7 +1510,7 @@
                   boxShadow: "0 6px 20px rgba(232,76,130,0.4)",
                   padding: "10px 18px",
                 }}>
-                  🎂 De la 10 copii
+                  🎂 Spațiu pentru 30 persoane
                 </div>
                 <div className="sticker" style={{
                   position: "absolute", bottom: 40, right: -28,
@@ -1520,7 +1520,7 @@
                   boxShadow: "0 4px 0 var(--c-text)",
                   padding: "10px 18px",
                 }}>
-                  🎈 Decor tematic inclus
+                  🌳 Curte de 900 mp
                 </div>
                 <div className="sticker" style={{
                   position: "absolute", top: "45%", left: -36,
@@ -1529,7 +1529,7 @@
                   boxShadow: "0 6px 20px rgba(123,93,201,0.4)",
                   padding: "10px 18px",
                 }}>
-                  🎭 Animatori profesioniști
+                  🎭 Animator: 250 lei/oră
                 </div>
               </div>
             </div>
@@ -1542,26 +1542,26 @@
     function PetreceriPachete() {
       const pachete = [
         {
-          name: "Mini Party",
-          price: "1200 lei",
-          kids: "10–15 copii",
+          name: "SUNNY",
+          price: "1400 lei",
+          kids: "30 persoane (copii + adulți)",
           color: "var(--c-primary)",
-          features: ["2 ore de distracție", "1 animator", "Candy bar simplu", "Decor baloane", "Muzică & jocuri", "Foto amintire grup"],
+          features: ["Acces exclusiv 4 ore", "Coffee bar (espresso, cafea)", "Decor standard (baloane, banner, veselă pastel)", "Bucătărie complet echipată", "Organizare la cerere sau pe cont propriu"],
         },
         {
-          name: "Super Party",
-          price: "1800 lei",
-          kids: "15–20 copii",
+          name: "SUNNY PLUS",
+          price: "1950 lei",
+          kids: "30 persoane (copii + adulți)",
           color: "#E84C82",
           popular: true,
-          features: ["3 ore de distracție", "2 animatori", "Candy bar premium", "Decor tematic la alegere", "Face painting", "Mini-disco", "Foto amintire + diplome", "Tort inclus"],
+          features: ["Tot ce include SUNNY, plus:", "Meniu copii la alegere (10 copii)", "Sucuri, apă, șampanie copii la tort", "Coffee bar inclus", "Bucătărie complet echipată"],
         },
         {
-          name: "Mega Party",
-          price: "2500 lei",
-          kids: "20–25 copii",
+          name: "SUNNY LAND",
+          price: "Personalizat",
+          kids: "Construiește-ți pachetul",
           color: "#7B5DC9",
-          features: ["4 ore de distracție", "3 animatori", "Candy bar deluxe", "Decor complet personalizat", "Face painting + baloane modelaj", "Spectacol magie / bubbles", "Foto + video amintire", "Tort premium inclus", "Invitații personalizate"],
+          features: ["Tot ce include SUNNY PLUS, plus:", "Meniu adulți la alegere", "Decor tematic personalizat", "Tobogan gonflabil", "Piñata cu dulciuri", "Organizare completă la cerere"],
         },
       ];
       return (
@@ -1573,7 +1573,7 @@
                 Alege pachetul potrivit
               </h2>
               <p className="section-lede">
-                Toate pachetele includ spațiul, curățenia și coordonarea completă. Tu vii, te bucuri, pleci.
+                Toate pachetele includ acces exclusiv la locație pentru 4 ore. Animator disponibil separat: 250 lei/oră.
               </p>
             </div>
             <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24, alignItems: "start" }}>
@@ -1619,11 +1619,12 @@
     function PetreceriFaq() {
       const [open, setOpen] = React.useState(0);
       const qs = [
-        { q: "Când pot organiza petrecerea?", a: "Sâmbătă și duminică, toată ziua, sau în timpul săptămânii după ora 17:00. Rezervă cu minim 2 săptămâni înainte." },
-        { q: "Pot aduce tort propriu?", a: "Da, dar pachetele Super și Mega includ deja tortul. Dacă preferi tort propriu, facem o reducere." },
-        { q: "Ce teme sunt disponibile?", a: "Prințese, supereroi, pirați, safari, spațiu cosmic, unicorni, Lego, știință nebună — sau orice altă temă la cerere." },
-        { q: "Pot rămâne părinții?", a: "Absolut! Avem un spațiu separat cu cafea și gustări pentru adulți, sau puteți participa alături de copii." },
-        { q: "Ce se întâmplă dacă plouă?", a: "Totul e în interior — sala noastră de 80mp e perfectă indiferent de vreme. Avem și curte pentru zilele frumoase." },
+        { q: "Cum rezerv o petrecere?", a: "Sună-ne la 0723.506.199 (Monica) sau 0724.301.160 (Adda) pentru a stabili data. Se plătește un avans de 500 lei pentru confirmare." },
+        { q: "Cât durează petrecerea?", a: "Toate pachetele includ 4 ore de acces exclusiv. Petrecerea poate fi prelungită cu 100 lei/30 minute, în limita disponibilității, dar nu mai târziu de 21:30." },
+        { q: "Ce se întâmplă dacă anulez?", a: "Anulările cu mai puțin de 2 săptămâni înainte de eveniment duc la reținerea avansului de 500 lei." },
+        { q: "Pot aduce mai mulți invitați?", a: "Capacitatea este de 30 persoane (copii + adulți). Pentru fiecare copil în plus, anunțat sau neanunțat, se percepe o taxă de 50 lei." },
+        { q: "Sunt reguli speciale?", a: "Copiii poartă șosete în casă, adulții — papuci de protecție. Nu sunt permise artificii sau confetti. Nu se vând băuturi alcoolice." },
+        { q: "Pot aduce animator sau alte servicii?", a: "Da! Animatorul nostru costă 250 lei/oră (jocuri, face painting, vânătoare de comori). Tobogan gonflabil de la 850 lei, atelier Art & Craft la cerere." },
       ];
       return (
         <section className="section" style={{ background: "var(--c-bg)" }}>
