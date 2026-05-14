@@ -736,6 +736,24 @@
     /* ── Părinți ── */
     function Parinti() {
       const [active, setActive] = React.useState(0);
+      const slideRef = React.useRef(null);
+
+      // Auto-slide every 5s
+      React.useEffect(() => {
+        const timer = setInterval(() => {
+          setActive(p => (p + 1) % 5);
+        }, 5000);
+        return () => clearInterval(timer);
+      }, []);
+
+      // Scroll to active card
+      React.useEffect(() => {
+        if (slideRef.current) {
+          const card = slideRef.current.children[active];
+          if (card) card.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+        }
+      }, [active]);
+
       const items = [
         {
           q: "Am ales Sunny Land Kids pentru ziua fetiței mele de 7 ani și a fost una dintre cele mai frumoase decizii. Totul a fost organizat impecabil, cu multă grijă și atenție la fiecare detaliu. Spațiul este mare, luminos și plin de energie bună.",
@@ -778,14 +796,34 @@
               </h2>
             </div>
 
-            <div className="testimonials-stack" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
+            {/* Slider controls */}
+            <div style={{ display: "flex", justifyContent: "center", gap: 12, marginBottom: 24 }}>
+              <button onClick={() => setActive(p => p > 0 ? p - 1 : items.length - 1)} style={{
+                width: 44, height: 44, borderRadius: "50%", border: "1.5px solid var(--c-border)",
+                background: "white", fontSize: 20, cursor: "pointer", display: "grid", placeItems: "center",
+              }}>‹</button>
+              <button onClick={() => setActive(p => (p + 1) % items.length)} style={{
+                width: 44, height: 44, borderRadius: "50%", border: "1.5px solid var(--c-border)",
+                background: "white", fontSize: 20, cursor: "pointer", display: "grid", placeItems: "center",
+              }}>›</button>
+            </div>
+
+            {/* Horizontal slider */}
+            <div ref={slideRef} className="no-scrollbar" style={{
+              display: "flex", gap: 24, overflowX: "auto", scrollSnapType: "x mandatory",
+              paddingBottom: 8, paddingTop: 28,
+            }}>
               {items.map((t, i) => (
-                <div key={i} className="card card-shadow" style={{
+                <div key={i} onClick={() => setActive(i)} className="card card-shadow" style={{
                   padding: "36px 32px",
                   borderTop: `6px solid ${t.c}`,
                   position: "relative",
-                  transform: i === active ? "translateY(-8px)" : "none",
-                  transition: "transform 0.25s ease",
+                  minWidth: 340, maxWidth: 400, flexShrink: 0,
+                  scrollSnapAlign: "center",
+                  opacity: i === active ? 1 : 0.5,
+                  transform: i === active ? "scale(1.03)" : "scale(0.97)",
+                  transition: "all 0.4s ease",
+                  cursor: "pointer",
                 }}>
                   <div style={{
                     position: "absolute", top: -22, left: 24,
@@ -810,6 +848,18 @@
                     </div>
                   </div>
                 </div>
+              ))}
+            </div>
+
+            {/* Dots */}
+            <div style={{ display: "flex", justifyContent: "center", gap: 8, marginTop: 20 }}>
+              {items.map((_, i) => (
+                <button key={i} onClick={() => setActive(i)} style={{
+                  width: i === active ? 28 : 10, height: 10, borderRadius: 5,
+                  background: i === active ? "var(--c-accent)" : "var(--c-border)",
+                  border: "none", cursor: "pointer",
+                  transition: "all 0.3s ease",
+                }} />
               ))}
             </div>
 
