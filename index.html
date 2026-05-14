@@ -738,22 +738,34 @@
       const [active, setActive] = React.useState(0);
       const items = [
         {
-          q: "Mihai vine acasă cu temele făcute, mâncat și fericit. Pentru noi, ca părinți care lucrăm până la 18, este liniștea zilnică de care aveam nevoie.",
-          n: "Andreea M.",
-          r: "mama lui Mihai, clasa a III-a",
+          q: "Am ales Sunny Land Kids pentru ziua fetiței mele de 7 ani și a fost una dintre cele mai frumoase decizii. Totul a fost organizat impecabil, cu multă grijă și atenție la fiecare detaliu. Spațiul este mare, luminos și plin de energie bună.",
+          n: "Surdu Roxana",
+          r: "recenzie Google ★★★★★",
+          c: "#E84C82",
+        },
+        {
+          q: "Un loc parcă desprins dintr-un basm — o casă spațioasă, luminoasă și aerisită, situată într-o zonă liniștită, cu o curte generoasă unde copiii se pot juca în siguranță.",
+          n: "Ruxi Brusten",
+          r: "recenzie Google ★★★★★",
           c: "var(--c-secondary)",
         },
         {
-          q: "Am încercat trei after-school-uri. Sunny Land a fost singurul unde fata mea a cerut singură să meargă a doua zi. Asta spune tot.",
-          n: "Radu D.",
-          r: "tatăl Mariei, clasa I",
+          q: "Un loc minunat pentru copii! Spațiu mare și luminos, grădină superbă și activități variate. Echipa este caldă și atentă, iar copiii vin mereu acasă zâmbind.",
+          n: "Anelis Cristine Pălivan",
+          r: "recenzie Google ★★★★★",
           c: "var(--c-primary)",
         },
         {
-          q: "Comunicarea cu doamna Iulia este excepțională. Știu de fiecare dată cum a fost ziua, ce a făcut, ce dificultăți a întâmpinat. Mă simt parte din echipă.",
-          n: "Cristina P.",
-          r: "mama lui Vlad, clasa a II-a",
+          q: "Un loc cald, cu oameni calzi și zâmbitori. Un loc în care copiii își pot dezvolta abilități de creativitate, lucru în echipă, înțelegere și organizare.",
+          n: "Catalina Palivan",
+          r: "recenzie Google ★★★★★",
           c: "var(--c-accent)",
+        },
+        {
+          q: "Acest loc este uimitor. Copiii au diverse activități în fiecare zi și se întorc cu zâmbetul pe buze! Recomand cu căldură.",
+          n: "Liz Chaushian",
+          r: "Local Guide Google ★★★★★",
+          c: "#7B5DC9",
         },
       ];
       return (
@@ -766,7 +778,7 @@
               </h2>
             </div>
 
-            <div className="testimonials-stack" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 24 }}>
+            <div className="testimonials-stack" style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(280px, 1fr))", gap: 24 }}>
               {items.map((t, i) => (
                 <div key={i} className="card card-shadow" style={{
                   padding: "36px 32px",
@@ -811,8 +823,8 @@
             }}>
               <div style={{ fontSize: 56 }}>⭐</div>
               <div>
-                <div style={{ fontFamily: "var(--f-display)", fontSize: 28, fontWeight: 700 }}>Recomandat de părinți</div>
-                <div style={{ color: "var(--c-text-soft)", marginTop: 4 }}>Echipă mică, atenție mare. Vino să ne cunoști și decide singur.</div>
+                <div style={{ fontFamily: "var(--f-display)", fontSize: 28, fontWeight: 700 }}>5.0 pe Google Maps · 8 recenzii</div>
+                <div style={{ color: "var(--c-text-soft)", marginTop: 4 }}>Toate recenziile sunt de 5 stele. Vino să ne cunoști și decide singur.</div>
               </div>
               <a href="#contact" className="btn btn-primary" style={{ padding: "14px 24px", fontSize: 15 }}>Vino într-un tur →</a>
             </div>
