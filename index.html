@@ -231,9 +231,12 @@
 
     /* Gallery responsive */
     @media (max-width: 760px) {
-      .gallery-grid { grid-template-columns: repeat(2, 1fr) !important; }
-      .gallery-grid > div { grid-row: span 1 !important; grid-column: span 1 !important; }
+      #galerie .gallery-grid-main { grid-template-columns: repeat(2, 1fr) !important; }
     }
+    /* Hide scrollbar but keep scroll */
+    .gallery-scroll::-webkit-scrollbar { height: 6px; }
+    .gallery-scroll::-webkit-scrollbar-track { background: transparent; }
+    .gallery-scroll::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 3px; }
 
     /* Testimonials responsive */
     @media (max-width: 880px) {
@@ -622,7 +625,38 @@
       const ttl = title || "Așa arată o săptămână la noi";
       const sub = subtitle || "Fără filtre, fără pozat. Doar copii care se simt bine.";
       const accentColor = accent || "orange";
+      const [lightbox, setLightbox] = React.useState(null);
       const rotations = [2, 1, -2, 1, -1, 3, -2, 2, -1, 2, -3, 1, 2, -1, 1, -2, 3, -1, 2, -2, 1];
+
+      const grid = imgs.slice(0, 8);
+      const rest = imgs.slice(8);
+
+      React.useEffect(() => {
+        if (lightbox === null) return;
+        const handler = (e) => { if (e.key === "Escape") setLightbox(null); if (e.key === "ArrowRight") setLightbox(p => p < imgs.length - 1 ? p + 1 : 0); if (e.key === "ArrowLeft") setLightbox(p => p > 0 ? p - 1 : imgs.length - 1); };
+        window.addEventListener("keydown", handler);
+        document.body.style.overflow = "hidden";
+        return () => { window.removeEventListener("keydown", handler); document.body.style.overflow = ""; };
+      }, [lightbox]);
+
+      const PhotoCard = ({ src, i }) => {
+        const r = rotations[i % rotations.length];
+        return (
+          <div onClick={() => setLightbox(i)} style={{
+            borderRadius: 20, overflow: "hidden", flexShrink: 0,
+            transform: `rotate(${r * 0.4}deg)`,
+            border: "5px solid white",
+            boxShadow: "0 8px 24px rgba(61,46,31,0.08)",
+            transition: "transform 0.2s ease, box-shadow 0.2s ease",
+            cursor: "pointer",
+          }}
+            onMouseEnter={e => { e.currentTarget.style.transform = "rotate(0deg) scale(1.03)"; e.currentTarget.style.boxShadow = "0 16px 40px rgba(61,46,31,0.15)"; }}
+            onMouseLeave={e => { e.currentTarget.style.transform = `rotate(${r * 0.4}deg)`; e.currentTarget.style.boxShadow = "0 8px 24px rgba(61,46,31,0.08)"; }}>
+            <img src={src} alt="" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "4/3" }} />
+          </div>
+        );
+      };
+
       return (
         <section id="galerie" className="section" style={{ background: "var(--c-bg)" }}>
           <div className="container">
@@ -631,32 +665,70 @@
               <h2 className="section-title" style={{ marginTop: 16 }}>{ttl}</h2>
               <p className="section-lede">{sub}</p>
             </div>
-            <div className="gallery-grid" style={{
-              display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16,
+
+            {/* Grid 4x2 */}
+            <div style={{
+              display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16,
             }}>
-              {imgs.map((src, i) => {
-                const r = rotations[i % rotations.length];
-                return (
-                  <div key={i} style={{
-                    borderRadius: 20,
-                    overflow: "hidden",
-                    transform: `rotate(${r * 0.4}deg)`,
-                    border: "5px solid white",
-                    boxShadow: "0 8px 24px rgba(61,46,31,0.08)",
-                    transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                    cursor: "pointer",
-                  }}
-                    onMouseEnter={e => { e.currentTarget.style.transform = "rotate(0deg) scale(1.03)"; e.currentTarget.style.boxShadow = "0 16px 40px rgba(61,46,31,0.15)"; }}
-                    onMouseLeave={e => { e.currentTarget.style.transform = `rotate(${r * 0.4}deg)`; e.currentTarget.style.boxShadow = "0 8px 24px rgba(61,46,31,0.08)"; }}>
-                    <img src={src} alt="" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "4/3" }} />
-                  </div>
-                );
-              })}
+              {grid.map((src, i) => <PhotoCard key={i} src={src} i={i} />)}
             </div>
+
+            {/* Horizontal scroll for the rest */}
+            {rest.length > 0 && (
+              <div style={{
+                display: "flex", gap: 16, overflowX: "auto", marginTop: 20,
+                paddingBottom: 12, scrollSnapType: "x mandatory",
+                WebkitOverflowScrolling: "touch",
+              }}>
+                {rest.map((src, i) => (
+                  <div key={i + 8} style={{ scrollSnapAlign: "start", minWidth: 260, maxWidth: 300 }}>
+                    <PhotoCard src={src} i={i + 8} />
+                  </div>
+                ))}
+              </div>
+            )}
+
             <div style={{ textAlign: "center", marginTop: 40 }}>
               <a href="#contact" className="btn btn-secondary">Vezi mai multe în vizita ta →</a>
             </div>
           </div>
+
+          {/* Lightbox */}
+          {lightbox !== null && (
+            <div onClick={() => setLightbox(null)} style={{
+              position: "fixed", inset: 0, zIndex: 9999,
+              background: "rgba(0,0,0,0.9)",
+              display: "flex", alignItems: "center", justifyContent: "center",
+              padding: 24,
+            }}>
+              <button onClick={(e) => { e.stopPropagation(); setLightbox(p => p > 0 ? p - 1 : imgs.length - 1); }} style={{
+                position: "absolute", left: 20, top: "50%", transform: "translateY(-50%)",
+                width: 52, height: 52, borderRadius: "50%", background: "rgba(255,255,255,0.15)",
+                color: "white", fontSize: 28, display: "grid", placeItems: "center",
+                cursor: "pointer", border: "none", backdropFilter: "blur(8px)",
+              }}>‹</button>
+              <img src={imgs[lightbox]} alt="" onClick={(e) => e.stopPropagation()} style={{
+                maxWidth: "90vw", maxHeight: "90vh", borderRadius: 16,
+                objectFit: "contain", boxShadow: "0 20px 60px rgba(0,0,0,0.5)",
+              }} />
+              <button onClick={(e) => { e.stopPropagation(); setLightbox(p => p < imgs.length - 1 ? p + 1 : 0); }} style={{
+                position: "absolute", right: 20, top: "50%", transform: "translateY(-50%)",
+                width: 52, height: 52, borderRadius: "50%", background: "rgba(255,255,255,0.15)",
+                color: "white", fontSize: 28, display: "grid", placeItems: "center",
+                cursor: "pointer", border: "none", backdropFilter: "blur(8px)",
+              }}>›</button>
+              <button onClick={() => setLightbox(null)} style={{
+                position: "absolute", top: 20, right: 20,
+                width: 44, height: 44, borderRadius: "50%", background: "rgba(255,255,255,0.15)",
+                color: "white", fontSize: 24, display: "grid", placeItems: "center",
+                cursor: "pointer", border: "none", backdropFilter: "blur(8px)",
+              }}>✕</button>
+              <div style={{
+                position: "absolute", bottom: 20,
+                color: "rgba(255,255,255,0.6)", fontSize: 14,
+              }}>{lightbox + 1} / {imgs.length}</div>
+            </div>
+          )}
         </section>
       );
     }
