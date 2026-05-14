@@ -746,11 +746,15 @@
         return () => clearInterval(timer);
       }, []);
 
-      // Scroll to active card
+      // Scroll to active card (use scrollLeft to avoid moving the whole page)
       React.useEffect(() => {
         if (slideRef.current) {
-          const card = slideRef.current.children[active];
-          if (card) card.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+          const container = slideRef.current;
+          const card = container.children[active];
+          if (card) {
+            const scrollPos = card.offsetLeft - container.offsetWidth / 2 + card.offsetWidth / 2;
+            container.scrollTo({ left: scrollPos, behavior: "smooth" });
+          }
         }
       }, [active]);
 
