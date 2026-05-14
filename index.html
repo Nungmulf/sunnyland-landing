@@ -1264,7 +1264,7 @@
                   key={opt.id}
                   ref={el => refs.current[i] = el}
                   className={active === opt.id ? "active" : ""}
-                  onClick={() => { onChange(opt.id); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  onClick={() => { onChange(opt.id); window.scrollTo(0, 0); }}
                 >
                   {opt.label}
                 </button>
