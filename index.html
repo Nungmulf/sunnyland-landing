@@ -613,49 +613,45 @@
     }
 
     /* ── Galerie ── */
-    function Galerie() {
-      const photos = [
-        { c: "cream", l: "atelier pictură", r: 2, span: 2 },
-        { c: "green", l: "ora de teme", r: 1, span: 1 },
-        { c: "peach", l: "joc în curte", r: -2, span: 1 },
-        { c: "lilac", l: "experiment știință", r: 1, span: 1 },
-        { c: "cream", l: "masa de prânz", r: -1, span: 1 },
-        { c: "green", l: "lectură pe perne", r: 3, span: 2 },
-        { c: "peach", l: "lucru manual", r: -2, span: 1 },
-        { c: "lilac", l: "ziua absolventului", r: 2, span: 1 },
-      ];
+    const GALLERY_AFTER = Array.from({ length: 14 }, (_, i) => `assets/photos/after/after-${i + 1}.jpg`);
+    const GALLERY_SUMMER = Array.from({ length: 2 }, (_, i) => `assets/photos/summer/summer-${i + 1}.jpg`);
+    const GALLERY_PARTY = Array.from({ length: 21 }, (_, i) => `assets/photos/party/party-${i + 1}.jpg`);
+
+    function Galerie({ photos, title, subtitle, accent }) {
+      const imgs = photos || GALLERY_AFTER;
+      const ttl = title || "Așa arată o săptămână la noi";
+      const sub = subtitle || "Fără filtre, fără pozat. Doar copii care se simt bine.";
+      const accentColor = accent || "orange";
+      const rotations = [2, 1, -2, 1, -1, 3, -2, 2, -1, 2, -3, 1, 2, -1, 1, -2, 3, -1, 2, -2, 1];
       return (
         <section id="galerie" className="section" style={{ background: "var(--c-bg)" }}>
           <div className="container">
             <div className="section-head center">
-              <span className="eyebrow orange">Galerie</span>
-              <h2 className="section-title" style={{ marginTop: 16 }}>
-                Așa arată o săptămână la noi
-              </h2>
-              <p className="section-lede">
-                Fără filtre, fără pozat. Doar copii care se simt bine.
-              </p>
+              <span className={`eyebrow ${accentColor}`}>Galerie</span>
+              <h2 className="section-title" style={{ marginTop: 16 }}>{ttl}</h2>
+              <p className="section-lede">{sub}</p>
             </div>
             <div className="gallery-grid" style={{
-              display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16,
-              gridAutoRows: "180px",
+              display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))", gap: 16,
             }}>
-              {photos.map((p, i) => (
-                <div key={i} className={`ph ${p.c}`} style={{
-                  gridColumn: `span ${p.span}`,
-                  gridRow: i === 0 || i === 5 ? "span 2" : "span 1",
-                  borderRadius: 20,
-                  transform: `rotate(${p.r * 0.3}deg)`,
-                  border: "5px solid white",
-                  boxShadow: "0 8px 24px rgba(61,46,31,0.08)",
-                  transition: "transform 0.2s ease, box-shadow 0.2s ease",
-                  cursor: "pointer",
-                }}
-                  onMouseEnter={e => { e.currentTarget.style.transform = `rotate(0deg) scale(1.02)`; e.currentTarget.style.boxShadow = "0 16px 40px rgba(61,46,31,0.15)"; }}
-                  onMouseLeave={e => { e.currentTarget.style.transform = `rotate(${p.r * 0.3}deg)`; e.currentTarget.style.boxShadow = "0 8px 24px rgba(61,46,31,0.08)"; }}>
-                  [ {p.l} ]
-                </div>
-              ))}
+              {imgs.map((src, i) => {
+                const r = rotations[i % rotations.length];
+                return (
+                  <div key={i} style={{
+                    borderRadius: 20,
+                    overflow: "hidden",
+                    transform: `rotate(${r * 0.4}deg)`,
+                    border: "5px solid white",
+                    boxShadow: "0 8px 24px rgba(61,46,31,0.08)",
+                    transition: "transform 0.2s ease, box-shadow 0.2s ease",
+                    cursor: "pointer",
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.transform = "rotate(0deg) scale(1.03)"; e.currentTarget.style.boxShadow = "0 16px 40px rgba(61,46,31,0.15)"; }}
+                    onMouseLeave={e => { e.currentTarget.style.transform = `rotate(${r * 0.4}deg)`; e.currentTarget.style.boxShadow = "0 8px 24px rgba(61,46,31,0.08)"; }}>
+                    <img src={src} alt="" loading="lazy" style={{ width: "100%", height: "100%", objectFit: "cover", display: "block", aspectRatio: "4/3" }} />
+                  </div>
+                );
+              })}
             </div>
             <div style={{ textAlign: "center", marginTop: 40 }}>
               <a href="#contact" className="btn btn-secondary">Vezi mai multe în vizita ta →</a>
@@ -1603,7 +1599,7 @@
                 <Hero />
                 <Despre />
                 <Oferim />
-                <Galerie />
+                <Galerie photos={GALLERY_AFTER} title="Așa arată o zi la noi" subtitle="Fără filtre, fără pozat. Doar copii care se simt bine." accent="orange" />
                 <Parinti />
                 <Faq />
                 <Locatie />
@@ -1614,7 +1610,7 @@
               <>
                 <SummerHero />
                 <SummerOferim />
-                <Galerie />
+                <Galerie photos={GALLERY_SUMMER} title="Vara la Sunny Land" subtitle="Aventuri, prieteni noi și amintiri pe viață." accent="blue" />
                 <Parinti />
                 <SummerFaq />
                 <Locatie />
@@ -1625,7 +1621,7 @@
               <>
                 <PetreceriHero />
                 <PetreceriPachete />
-                <Galerie />
+                <Galerie photos={GALLERY_PARTY} title="Petreceri la Sunny Land" subtitle="Zâmbete, baloane și tort. Exact cum trebuie." accent="pink" />
                 <PetreceriFaq />
                 <Locatie />
                 <Contact />
